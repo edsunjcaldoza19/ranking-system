@@ -19,8 +19,8 @@
                                 $getClassID = $_GET['class_id'];
                                 $getQuarterID = $_GET['quarter_id'];
                             ?>
-                            <input type="text" value="<?php echo $getClassID ?>" name="subjectClass">
-                            <input type="text" value="<?php echo $getQuarterID ?>" name="subjectQuarter">
+                            <input type="hidden" value="<?php echo $getClassID ?>" name="subjectClass">
+                            <input type="hidden" value="<?php echo $getQuarterID ?>" name="subjectQuarter">
                             <label>Subject Name</label>
                             <input class="form-control" type="text" name="subjectName" placeholder="Enter Subject Name">
                         </div>

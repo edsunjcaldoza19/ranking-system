@@ -4,11 +4,13 @@
 
 	if(ISSET($_POST['add'])){
 		try{
-			$sectionName = $_POST['sectionName'];
-			$sectionGradeLevel = $_POST['sectionGradeLevel'];
+			$gradeSubject = $_POST['gradeSubject'];
+			$gradeStudent = $_POST['gradeStudent'];
+			$grade = $_POST['grade'];
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO tbl_section(`s_name`, `s_grade_level`)
-            VALUES('$sectionName', '$sectionGradeLevel')";
+			$sql = "INSERT INTO `tbl_grade`
+			(`grade_subject_id`, `grade_stud_id`, `grade`)
+			VALUES ('$gradeSubject','$gradeStudent','$grade')";
 			$conn->exec($sql);
 		}catch(PDOException $e){
 			echo $e->getMessage();
@@ -21,11 +23,11 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Section Successfully Added",
+					title: "Student Grade Successfully Added",
 					timer: 3000
 				}).then(function(){
 
-					window.location.replace("../../section.php");
+					window.location.replace("../../class_grade.php?sy_id='.$_GET['sy_id'].'&&quarter_id='.$_GET['quarter_id'].'&&class_id='.$_GET['class_id'].'&&subject_id='.$_GET['subject_id'].'");
 
 				});
 

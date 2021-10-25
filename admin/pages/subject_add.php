@@ -69,7 +69,7 @@
                             <div class="card-header">
                                 <button class="btn btn-success btn rounded-pill"
                                     data-bs-toggle="modal" data-bs-target="#addModal">
-                                    Add Student
+                                    Add Subject
                                 </button>
                                 <a href="subject.php?sy_id=<?php echo $getSchoolYear;?>" class="btn btn-primary btn rounded-pill">
                                     Back to Class List

@@ -20,14 +20,14 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Select Quarter</h3>
-                                <p class="text-subtitle text-muted">Select Quarter to continue browsing the classes</p>
+                                <h3>Add Student Grade</h3>
+                                <p class="text-subtitle text-muted">Add Student Record</p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Subjects</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Grades</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -40,7 +40,16 @@
                     <section class="section">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Class List</h3>
+                                <?php
+                                            //GET Subject ID using GET METHOD
+                                            $subjectID = $_GET['subject_id'];
+                                            //FETCH tbl_grade
+                                            $sql = $conn->prepare("SELECT * FROM tbl_subject
+                                            WHERE `id` = $subjectID");
+                                            $sql->execute();
+                                            $fetch = $sql->fetch();
+                                        ?>
+                                <h3><?php echo $fetch['subject_name']; ?></h3>
                                 <button class="btn btn-success btn rounded-pill"
                                     data-bs-toggle="modal" data-bs-target="#addModal">
                                     Add Student Grade
@@ -50,9 +59,8 @@
                                 <table class="table" id="table1">
                                     <thead>
                                         <tr>
-                                            <th>Class</th>
-                                            <th>Subject Name</th>
-                                            <th style="width: 20%;">Add Students</th>
+                                            <th>Student Name</th>
+                                            <th>Grade</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -71,16 +79,8 @@
                                             while($fetch = $sql->fetch()){
                                         ?>
                                             <tr>
-                                                <td>
-                                                    <?php echo $fetch['gl_grade_level']?>
-                                                    <?php echo " - "?>
-                                                    <?php echo $fetch['s_name']?>
-                                                </td>
-                                                <td><?php echo $fetch['subject_name']?></td>
-                                                <td>
-                                                    <a href="class_subject.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $fetch['subject_quarter_id']; ?>"
-                                                    class="btn btn-primary btn rounded-pill mt-2">Select Quarter</a>
-                                                </td>
+                                                <td><?php echo $fetch['stud_name']?></td>
+                                                <td><?php echo $fetch['grade']?></td>
                                             </tr>
                                         <?php
                                             };
@@ -95,6 +95,7 @@
                     <!-- End Content Section -->
                 </div>
                 <?php
+                    include 'be/grade/addModal.php';
                     include 'includes/footer.php';
                 ?>
             </div>

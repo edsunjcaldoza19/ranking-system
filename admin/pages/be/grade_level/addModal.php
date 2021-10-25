@@ -15,8 +15,9 @@
                 </div>
                 <div class="modal-body">
                         <div class="form-group">
-                            <label>School Year</label>
+                            <label>Grade Level</label>
                             <input type="text" class="form-control" name="gradeLevel" placeholder="Enter Grade Level (example: Grade One)">
+                            <small>Please indicate the strand here. (ex. Grade 12-ICT)</small>
                         </div>
                 </div>
                 <div class="modal-footer">

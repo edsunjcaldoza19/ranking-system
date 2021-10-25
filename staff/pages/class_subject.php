@@ -82,7 +82,7 @@
                                                 </td>
                                                 <td><?php echo $fetch['subject_name']?></td>
                                                 <td>
-                                                    <a href="class_grade.php?subject_id=<?php echo $fetch['id'];?>"
+                                                    <a href="class_grade.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $fetch['subject_class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
                                                     class="btn btn-primary btn rounded-pill mt-2">Select</a>
                                                 </td>
                                             </tr>
