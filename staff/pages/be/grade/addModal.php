@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label>Grade</label>
-                            <input type="text" class="form-control" name="grade" placeholder="Enter Grade">
+                            <input type="number" max="100" class="form-control" name="grade" placeholder="Enter Grade">
                         </div>
                 </div>
                 <div class="modal-footer">

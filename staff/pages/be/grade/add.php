@@ -7,6 +7,7 @@
 			$gradeSubject = $_POST['gradeSubject'];
 			$gradeStudent = $_POST['gradeStudent'];
 			$grade = $_POST['grade'];
+
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "INSERT INTO `tbl_grade`
 			(`grade_subject_id`, `grade_stud_id`, `grade`)

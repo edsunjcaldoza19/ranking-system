@@ -61,6 +61,8 @@
                                         <tr>
                                             <th>Student Name</th>
                                             <th>Grade</th>
+                                            <th style="width: 20%;">Update</th>
+                                            <th style="width: 20%;">Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -81,8 +83,17 @@
                                             <tr>
                                                 <td><?php echo $fetch['stud_name']?></td>
                                                 <td><?php echo $fetch['grade']?></td>
+                                                <td>
+                                                    <button class="btn btn-primary btn rounded-pill" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $fetch['id']?>">Update</button>
+                                                </td>
+
+                                                <td>
+                                                    <button class="btn btn-danger btn rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $fetch['id']?>">Delete</button>
+                                                </td>
                                             </tr>
                                         <?php
+                                            include 'be/grade/updateModal.php';
+                                            include 'be/grade/deleteModal.php';
                                             };
                                         ?>
                                     </tbody>

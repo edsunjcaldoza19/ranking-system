@@ -4,9 +4,9 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
         role="document">
             <div class="modal-content">
-            <form action="be/section/delete.php" method="POST" enctype="multipart/form-data">
+            <form action="be/grade/delete.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $_GET['subject_id'];?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-header bg-danger">
-                        <h5 class="modal-title white" id="myModalLabel110">Delete Section
+                        <h5 class="modal-title white" id="myModalLabel110">Delete Student Record
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">

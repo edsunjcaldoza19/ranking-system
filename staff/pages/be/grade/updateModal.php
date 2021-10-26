@@ -4,9 +4,9 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
         role="document">
             <div class="modal-content">
-            <form action="be/section/update.php" method="POST" enctype="multipart/form-data">
+            <form action="be/grade/update.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $_GET['subject_id'];?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-header bg-primary">
-                        <h5 class="modal-title white" id="myModalLabel110">Update School Year
+                        <h5 class="modal-title white" id="myModalLabel110">Update Student Record
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">
@@ -15,24 +15,34 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id" value="<?php echo $fetch['id']?>">
-                        <div class="form-group">
-                            <label>Section Name</label>
-                            <input type="text" value="<?php echo $fetch['s_name']; ?>" class="form-control" name="sectionName" placeholder="Enter Section Name">
-                        </div>
-                        <div class="form-group">
-                            <label>Grade Level</label>
-                            <select class="form-select" name="sectionGradeLevel">
+                    <div class="form-group">
+                            <?php
+                                //GET class ID using Get Method
+                                $getClassID = $_GET['class_id'];
+                                $getSubjectID = $_GET['subject_id'];
+                            ?>
+                            <input type="hidden" name="gradeSubject" value="<?php echo $getSubjectID ?>">
+                            <label>Student Name</label>
+                            <select class="form-select" name="gradeStudent">
                             <?php
                                 require 'be/database/db_pdo.php';
-                                $sqlGradeLevel = $conn->prepare("SELECT * FROM `tbl_grade_level` ORDER BY `gl_grade_level` ASC");
-                                $sqlGradeLevel->execute();
-                                while($fetchGradeLevel = $sqlGradeLevel->fetch()){
+                                $sqlClass = $conn->prepare("SELECT *, tbl_populate_class.id FROM tbl_populate_class
+                                LEFT JOIN tbl_student ON
+                                tbl_student.id=tbl_populate_class.pop_stud_id
+                                WHERE `pop_class_id` = $getClassID");
+                                $sqlClass->execute();
+                                while($fetchClass = $sqlClass->fetch()){
                             ?>
-                                <option name="sectionGradeLevel" value="<?php echo $fetchGradeLevel['id'] ?>"><?php echo $fetchGradeLevel['gl_grade_level'] ?></option>
+                                <option <?php if($fetch['grade_stud_id'] == $fetchClass['pop_stud_id'])
+                                        {echo 'selected';}?> name="gradeStudent" value="<?php echo $fetchClass['pop_stud_id'] ?>"><?php echo $fetchClass['stud_name'] ?></option>
                             <?php
                                 }
                             ?>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Grade</label>
+                            <input type="text" value="<?php echo $fetch['grade']; ?>" class="form-control" name="grade" placeholder="Enter Grade">
                         </div>
                 </div>
                 <div class="modal-footer">

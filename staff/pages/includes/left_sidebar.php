@@ -67,7 +67,13 @@
                 <li class="sidebar-item <?= ($activePage == 'ranking') ? 'active': ''; ?>">
                     <a href="ranking.php" class='sidebar-link'>
                         <i class="bi bi-bar-chart-fill"></i>
-                        <span>Ranking</span>
+                        <span>Ranking by Class</span>
+                    </a>
+                </li>
+                <li class="sidebar-item <?= ($activePage == 'ranking_subject') ? 'active': ''; ?>">
+                    <a href="ranking_subject.php" class='sidebar-link'>
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Ranking by Subject</span>
                     </a>
                 </li>
 

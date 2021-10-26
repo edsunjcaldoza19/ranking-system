@@ -5,12 +5,14 @@
 	if(ISSET($_POST['update'])){
 		try{
 			$id = $_POST['id'];
-			$sectionName = $_POST['sectionName'];
-			$sectionGradeLevel = $_POST['sectionGradeLevel'];
+			$gradeSubject = $_POST['gradeSubject'];
+			$gradeStudent = $_POST['gradeStudent'];
+			$grade = $_POST['grade'];
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE `tbl_section`
-            SET `s_name` = '$sectionName', `s_grade_level` = '$sectionGradeLevel' WHERE `id` = '$id'";
+			$sql = "UPDATE `tbl_grade` SET `grade_subject_id`='$gradeSubject',
+			`grade_stud_id`='$gradeStudent',`grade`='$grade'
+			WHERE `id` = '$id'";
 			$conn->exec($sql);
 		}catch(PDOException $e){
 			echo $e->getMessage();
@@ -23,11 +25,11 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Section Successfully Updated",
+					title: "Record Successfully Updated",
 					timer: 3000
 				}).then(function(){
 
-					window.location.replace("../../section.php");
+					window.location.replace("../../class_grade.php?sy_id='.$_GET['sy_id'].'&&quarter_id='.$_GET['quarter_id'].'&&class_id='.$_GET['class_id'].'&&subject_id='.$_GET['subject_id'].'");
 
 				});
 

@@ -56,6 +56,7 @@
                                         <?php
                                             //Fetch Staff ID using Session
                                             $getStaffID = $_SESSION['staff_id'];
+                                            $getSchoolYear = $_GET['sy_id'];
                                             $getQuarterID = $_GET['quarter_id'];
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
@@ -70,7 +71,8 @@
                                             tbl_grade_level.id=tbl_section.s_grade_level
 
                                             WHERE `subject_teacher` = $getStaffID
-                                            AND `subject_quarter_id` = $getQuarterID");
+                                            AND `subject_quarter_id` = $getQuarterID
+                                            AND `class_sy` = $getSchoolYear");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
