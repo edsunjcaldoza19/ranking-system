@@ -38,9 +38,15 @@
                              <!-- populate table with db data -->
                              <?php
                                 require 'be/database/db_pdo.php';
-                                $sql = $conn->prepare("SELECT * FROM `tbl_quarter`");
-                                $sql->execute();
-                                while($fetch = $sql->fetch()){
+                                $sqlClass = $conn->prepare("SELECT *, tbl_class.id FROM tbl_class
+                                LEFT JOIN tbl_section ON
+                                tbl_section.id=tbl_class.class_section
+                                LEFT JOIN tbl_grade_level ON
+                                tbl_grade_level.id=tbl_section.s_grade_level
+                                LEFT JOIN tbl_account_staff ON
+                                tbl_account_staff.id=tbl_class.class_adviser");
+                                $sqlClass->execute();
+                                while($fetchClass = $sqlClass->fetch()){
                             ?>
 
                             <div class="col-xl-4 col-md-6 col-sm-12">
@@ -49,13 +55,17 @@
                                         <div class="card-body">
                                             <h4 class="card-title">HTC-RANK</h4>
                                             <hr>
-                                            <h4><?php echo $fetch['q_quarter']; ?></h4>
+                                            <h4><?php
+                                            echo $fetchClass['gl_grade_level'];
+                                            echo " - ";
+                                            echo $fetchClass['s_name'];
+                                            ?></h4>
                                         </div>
                                         <img class="img-fluid w-100" src="<?php echo $image; ?>" style="height: 350px;" alt="Card image cap">
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
-                                        <span>Select this quarter</span>
-                                        <a href="grade_class.php?sy_id=<?php echo $_GET['sy_id']; ?>&&quarter_id=<?php echo $fetch['id']; ?>" class="btn btn-primary">Select</a>
+                                        <span>Select this class</span>
+                                        <a href="grade_subject.php?sy_id=<?php echo $_GET['sy_id']; ?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $fetchClass['id']; ?>" class="btn btn-primary">Select</a>
                                     </div>
                                 </div>
                             </div>
