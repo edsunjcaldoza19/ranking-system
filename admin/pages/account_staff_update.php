@@ -77,7 +77,7 @@
                                                 <!-- Load IMAGE filename -->
                                                 <input type="hidden" name="oldImage" value="<?php echo $fetch['staff_image']; ?>">
                                                     <?php
-                                                        $image = (!empty($fetch['staff_image'])) ? '../images/staff/'.$fetch['staff_image'] : '../images/staff/default.png';
+                                                        $image = (!empty($fetch['staff_image'])) ? '../../images/staff/'.$fetch['staff_image'] : '../images/staff/default.png';
                                                     ?>
                                                 <div class="col-md-12">
                                                     <img src="<?php echo $image; ?>" id="preview" width="300px" height="300px" style="border: 2px solid;"/>

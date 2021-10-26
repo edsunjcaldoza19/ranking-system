@@ -20,7 +20,15 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Populate Class</h3>
+                                        <?php
+                                            $getSchoolYear = $_GET['sy_id'];
+                                            require 'be/database/db_pdo.php';
+                                            $sql = $conn->prepare("SELECT * FROM tbl_school_year
+                                            WHERE `id` = $getSchoolYear");
+                                            $sql->execute();
+                                            $fetchSY = $sql->fetch();
+                                        ?>
+                                <h3>Populate Class (S.Y. <?php echo $fetchSY['sy_school_year']; ?>)</h3>
                                 <p class="text-subtitle text-muted">Add Students per Classes</p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
@@ -75,7 +83,7 @@
                                                 <td><?php echo $fetch['sy_school_year']?></td>
                                                 <td><?php echo $fetch['s_name']?></td>
                                                 <td><?php echo $fetch['gl_grade_level']?></td>
-                                                <td><?php echo $fetch['staff_name']?></td>
+                                                <td><span class="badge bg-primary"><?php echo $fetch['staff_name']?></span></td>
                                                 <td>
                                                     <a href="populate_class_student.php?sy_id=<?php echo $getSchoolYear; ?>&&class_id=<?php echo $fetch['id']; ?>" class="btn btn-success btn rounded-pill">Add Students</a>
                                                 </td>

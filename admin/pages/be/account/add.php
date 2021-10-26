@@ -10,7 +10,7 @@
             $random=rand(0,100000);
             $rename = 'IMG_STAFF'.date('Ymd').$random;
             $newname = $rename.'.'.$extension;
-            $target="../../../images/staff/".$newname;
+            $target="../../../../images/staff/".$newname;
 
 			$staffUsername = $_POST['staffUsername'];
             $staffPassword = $_POST['staffPassword'];

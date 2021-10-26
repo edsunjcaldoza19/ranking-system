@@ -28,7 +28,7 @@
 			$random=rand(0,100000);
 			$rename = 'IMG_STAFF'.date('Ymd').$random;
 			$newname = $rename.'.'.$extension;
-			$target="../../../images/staff/".$newname;
+			$target="../../../../images/staff/".$newname;
 			//old Image
 			$oldImage = $_POST['oldImage'];
 
@@ -36,7 +36,7 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$sql = "UPDATE `tbl_account_staff` SET `staff_image`='$newname' WHERE `id` = '$id'";
 				$conn->exec($sql);
-				if (unlink("../../../images/staff/".$oldImage)) {
+				if (unlink("../../../../images/staff/".$oldImage)) {
 					$msg= "Deleted";
 				}
 				else {

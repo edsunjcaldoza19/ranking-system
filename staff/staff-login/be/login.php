@@ -15,14 +15,14 @@
 	}
 
 	if(ISSET($_POST['login'])){
-		if($_POST['email'] != "" || $_POST['password'] != ""){
-			$email = $_POST['email'];
+		if($_POST['username'] != "" || $_POST['password'] != ""){
+			$username = $_POST['username'];
 			// md5 encrypted
 			// $password = md5($_POST['password']);
 			$password = $_POST['password'];
 			$sql = "SELECT * FROM `tbl_account_staff` WHERE `staff_username`=? AND `staff_password`=? ";
 			$query = $conn->prepare($sql);
-			$query->execute(array($email,$password));
+			$query->execute(array($username,$password));
 			$row = $query->rowCount();
 			$fetch = $query->fetch();
 			if($row > 0) {

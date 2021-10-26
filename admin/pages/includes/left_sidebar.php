@@ -70,6 +70,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item <?= ($activePage == 'account_browse') ? 'active': ''; ?>">
+                    <a href="account_browse.php" class='sidebar-link'>
+                        <i class="bi bi-person-fill"></i>
+                        <span>Browse Accounts</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-title">Classes</li>
                 <li class="sidebar-item <?= ($activePage == 'class') ? 'active': ''; ?>">
                     <a href="class.php" class='sidebar-link'>
@@ -128,11 +135,28 @@
 
                 <li class="sidebar-title">Statistics</li>
 
-                <li class="sidebar-item <?= ($activePage == 'grade') ? 'active': ''; ?>">
-                    <a href="grade.php" class='sidebar-link'>
-                        <i class="bi bi-graph-up"></i>
-                        <span>Grades</span>
+                <li class="sidebar-item has-sub <?= ($activePage == 'grade') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-person-check-fill"></i>
+                        <span>Grade</span>
                     </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'grade') ? 'active': ''; ?> ">
+                            <a href="grade.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
                 </li>
 
                 <li class="sidebar-item <?= ($activePage == 'ranking') ? 'active': ''; ?>">
