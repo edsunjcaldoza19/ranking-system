@@ -10,6 +10,7 @@
     </head>
 
 <body>
+
     <div id="app">
     <?php include 'includes/left_sidebar.php'; ?>
         <div id="main" class='layout-navbar'>

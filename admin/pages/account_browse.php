@@ -67,7 +67,7 @@
                                             </p>
                                         </div>
                                             <?php
-                                                $image = (!empty($fetch['staff_image'])) ? '../../images/staff/'.$fetch['staff_image'] : '../images/staff/default.png';
+                                                $image = (!empty($fetch['staff_image'])) ? '../../images/staff/'.$fetch['staff_image'] : '../../images/staff/default.png';
                                             ?>
                                         <img class="img-fluid w-100" src="<?php echo $image; ?>" style="height: 350px;" alt="Card image cap">
                                     </div>

@@ -9,12 +9,19 @@
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "DELETE FROM `tbl_account_staff` WHERE `id` = '$id'";
 			$conn->exec($sql);
-			if (unlink("../../../images/staff/".$staffImage)) {
-				$msg= "Deleted";
+
+			if($staffImage != ""){
+				if (unlink("../../../../images/staff/".$staffImage)) {
+					$msg= "Deleted";
+				}
+				else {
+					$msg ="Not Deleted";
+				}
 			}
-			else {
-				$msg ="Not Deleted";
+			else{
+				$msg ="File not Found";
 			}
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

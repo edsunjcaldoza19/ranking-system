@@ -32,17 +32,36 @@
                     </div>
                     <!-- End Page Header + Title -->
 
-                    <!-- Start Content Section -->
-                    <section class="section">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Example Content</h4>
+                   <!-- Start Content Section -->
+                   <section class="section">
+                        <div class="row">
+                             <!-- populate table with db data -->
+                             <?php
+                                require 'be/database/db_pdo.php';
+                                $sql = $conn->prepare("SELECT * FROM `tbl_quarter`");
+                                $sql->execute();
+                                while($fetch = $sql->fetch()){
+                            ?>
+
+                            <div class="col-xl-4 col-md-6 col-sm-12">
+                                <div class="card bg-light-primary">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <h4><?php echo $fetch['q_quarter']; ?></h4>
+                                            <hr>
+                                        </div>
+                                        <img class="img-fluid w-100" src="../../images/card-img.jpg" style="height: 350px;" alt="Card image cap">
+                                    </div>
+                                    <div class="card-footer d-flex justify-content-between">
+                                        <span>Select this quarter</span>
+                                        <a href="ranking_class_sel_class.php?sy_id=<?php echo $_GET['sy_id']; ?>&&quarter_id=<?php echo $fetch['id']; ?>" class="btn btn-primary">Select</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur quas omnis laudantium tempore
-                                exercitationem, expedita aspernatur sed officia asperiores unde tempora maxime odio reprehenderit
-                                distinctio incidunt! Vel aspernatur dicta consequatur!
-                            </div>
+                            <?php
+                                }
+                            ?>
+
                         </div>
                     </section>
                     <!-- End Content Section -->

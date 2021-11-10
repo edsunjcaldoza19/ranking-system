@@ -20,14 +20,14 @@
 			// md5 encrypted
 			// $password = md5($_POST['password']);
 			$password = $_POST['password'];
-			$sql = "SELECT * FROM `tbl_account_admin` WHERE `admin_email`=? AND `admin_password`=? ";
+			$sql = "SELECT * FROM `tbl_account_admin` WHERE `admin_username`=? AND `admin_password`=? ";
 			$query = $conn->prepare($sql);
 			$query->execute(array($username,$password));
 			$row = $query->rowCount();
 			$fetch = $query->fetch();
 			if($row > 0) {
 				$_SESSION['admin_id'] = $fetch['id'];
-                $_SESSION['admin_email'] = $fetch['admin_email'];
+                $_SESSION['admin_username'] = $fetch['admin_username'];
                 $_SESSION['admin_password'] = $fetch['admin_password'];
 				echo '
 					<script>

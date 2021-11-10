@@ -58,7 +58,7 @@
                                             <th>Section</th>
                                             <th>Grade Level</th>
                                             <th>Adviser</th>
-                                            <th style="width: 20%;">Add Students</th>
+                                            <th style="width: 20%;">Quarter</th>
                                         </tr>
                                     </thead>
                                     <tbody>

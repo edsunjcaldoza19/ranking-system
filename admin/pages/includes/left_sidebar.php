@@ -24,13 +24,25 @@
                 <li class="sidebar-item <?= ($activePage == 'school_year') ? 'active': ''; ?>">
                     <a href="school_year.php" class='sidebar-link'>
                         <i class="bi bi-calendar-date-fill"></i>
-                        <span>School Year</span>
+                        <?php
+                            include 'be/database/db_pdo.php';
+                            $query = "SELECT * FROM tbl_school_year";
+                            $result=$conn->query($query);
+                            $count = $result->rowCount();
+                        ?>
+                        <span>School Year</span><span class="badge bg-success"><?php echo $count; ?></span>
                     </a>
                 </li>
                 <li class="sidebar-item <?= ($activePage == 'quarter') ? 'active': ''; ?>">
                     <a href="quarter.php" class='sidebar-link'>
                         <i class="bi bi-calendar-event-fill"></i>
-                        <span>Quarters</span>
+                        <?php
+                            include 'be/database/db_pdo.php';
+                            $query = "SELECT * FROM tbl_quarter";
+                            $result=$conn->query($query);
+                            $count = $result->rowCount();
+                        ?>
+                        <span>Quarters</span><span class="badge bg-success"><?php echo $count; ?></span>
                     </a>
                 </li>
 
@@ -72,7 +84,7 @@
 
                 <li class="sidebar-item <?= ($activePage == 'account_browse') ? 'active': ''; ?>">
                     <a href="account_browse.php" class='sidebar-link'>
-                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-people-fill"></i>
                         <span>Browse Accounts</span>
                     </a>
                 </li>
@@ -159,17 +171,49 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-item <?= ($activePage == 'ranking') ? 'active': ''; ?>">
-                    <a href="ranking.php" class='sidebar-link'>
+                <li class="sidebar-item has-sub <?= ($activePage == 'ranking_class') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
                         <i class="bi bi-bar-chart-fill"></i>
                         <span>Ranking by Class</span>
                     </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'grade') ? 'active': ''; ?> ">
+                            <a href="ranking_class.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
                 </li>
 
                 <li class="sidebar-item <?= ($activePage == 'ranking_subject') ? 'active': ''; ?>">
                     <a href="ranking_subject.php" class='sidebar-link'>
-                        <i class="bi bi-book-half"></i>
+                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                         <span>Ranking by Subject</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-title">Settings</li>
+
+                <li class="sidebar-item <?= ($activePage == 'settings_account') ? 'active': ''; ?>">
+                    <a href="settings_account.php" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-person-fill"></i>
+                        <span>Account Settings</span>
+                    </a>
+                </li>
+                <li class="sidebar-item <?= ($activePage == 'settings_details') ? 'active': ''; ?>">
+                    <a href="settings_details.php" class='sidebar-link'>
+                    <i class="bi bi-pen-fill"></i>
+                        <span>School Details</span>
                     </a>
                 </li>
 

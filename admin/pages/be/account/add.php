@@ -4,14 +4,25 @@
 
 	if(ISSET($_POST['add'])){
 		try{
-            //pathinfo
-            $image=$_FILES['staffImage']['name'];
-            $extension = pathinfo($image, PATHINFO_EXTENSION);
-            $random=rand(0,100000);
-            $rename = 'IMG_STAFF'.date('Ymd').$random;
-            $newname = $rename.'.'.$extension;
-            $target="../../../../images/staff/".$newname;
+			$image=$_FILES['staffImage']['name'];
 
+			if($image != ""){
+				//Pathinfo ** Uploaded an image
+				$extension = pathinfo($image, PATHINFO_EXTENSION);
+				$random=rand(0,100000);
+				$rename = 'IMG_STAFF'.date('Ymd').$random;
+				$newname = $rename.'.'.$extension;
+				$target="../../../../images/staff/".$newname;
+
+				 //Move to path
+				 if(move_uploaded_file($_FILES['staffImage']['tmp_name'], $target)){
+					$msg="Image uploaded successfully";
+				}
+			}else{
+				$newname = "";
+			}
+
+			//Get Input Values
 			$staffUsername = $_POST['staffUsername'];
             $staffPassword = $_POST['staffPassword'];
             $staffName = $_POST['staffName'];
@@ -29,10 +40,7 @@
             '$staffSex','$staffAddress','$staffDateBirth',
             '$staffEmail','$staffContact')";
 			$conn->exec($sql);
-             //Move to path
-            if(move_uploaded_file($_FILES['staffImage']['tmp_name'], $target)){
-                $msg="Image uploaded successfully";
-            }
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
