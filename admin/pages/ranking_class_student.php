@@ -64,7 +64,7 @@
                                         </div>
                                         <!-- table strip dark -->
                                         <div class="table-responsive">
-                                        <table class="table table-striped mb-0" id="myTable">
+                                            <table class="table table-striped mb-0" id="myTable">
                                                 <thead>
                                                     <tr>
                                                         <th>RANK</th>
@@ -91,7 +91,6 @@
                                                     while($fetch = $sql->fetch()){
                                                         $rankCounter++;
                                                     */
-
                                                     ?>
                                                     <?php
                                                     $sqlPopClass = $conn->prepare("SELECT *, tbl_populate_class.id
@@ -104,22 +103,51 @@
                                                     while($fetchPopClass = $sqlPopClass->fetch()){
                                                         $fetchStudentID = $fetchPopClass['pop_stud_id'];
                                                         $rankCounter++;
-
                                                     ?>
                                                     <tr>
                                                         <?php
-
-                                                                $sqlClass = $conn->prepare("SELECT AVG(grade) FROM tbl_grade
-                                                                WHERE grade_stud_id = $fetchStudentID ORDER BY AVG(grade) DESC");
-                                                                $sqlClass->execute();
-                                                                while($fetchClass = $sqlClass->fetch()){
+                                                            $sqlClass = $conn->prepare("SELECT AVG(grade) FROM tbl_grade
+                                                            WHERE grade_stud_id = $fetchStudentID ORDER BY AVG(grade) ASC");
+                                                            $sqlClass->execute();
+                                                            while($fetchClass = $sqlClass->fetch()){
                                                         ?>
-                                                        <td><?php echo $rankCounter; ?></td>
+                                                        <td><?php echo $rankCounter;?></td>
                                                         <td class="text-bold-500"><?php echo $fetchClass['AVG(grade)']; ?></td>
                                                         <td class="text-bold-500"><?php echo $fetchPopClass['stud_name']; ?></td>
                                                         <?php
                                                             }
                                                         ?>
+                                                    </tr>
+                                                    <?php
+                                                    }
+                                                    ?>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0" id="myTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>RANK</th>
+                                                        <th>NAME</th>
+                                                        <th>AVERAGE</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $getClassID = $_GET['class_id'];
+                                                    ?>
+                                                    <?php
+                                                    $sqlClass2 = $conn->prepare("SELECT AVG(grade) FROM tbl_grade
+                                                    ORDER BY AVG(grade) DESC");
+                                                    $sqlClass2->execute();
+                                                    while($fetchClass2 = $sqlClass2->fetch()){
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $rankCounter; ?></td>
+                                                        <td class="text-bold-500"><?php echo $fetchClass2['AVG(grade)']; ?></td>
+
                                                     </tr>
                                                     <?php
                                                     }
@@ -154,40 +182,40 @@
     <script src="../../js/mazer.js"></script>
 
     <script>
-function sortTable() {
-  var table, rows, switching, i, x, y, shouldSwitch;
-  table = document.getElementById("myTable");
-  switching = true;
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = table.rows;
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[0];
-      y = rows[i + 1].getElementsByTagName("TD")[0];
-      //check if the two rows should switch place:
-      if (Number(x.innerHTML) > Number(y.innerHTML)) {
-        //if so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-      }
+    function sortTable() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("myTable");
+    switching = true;
+    /*Make a loop that will continue until
+    no switching has been done:*/
+    while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+        //start by saying there should be no switching:
+        shouldSwitch = false;
+        /*Get the two elements you want to compare,
+        one from current row and one from the next:*/
+        x = rows[i].getElementsByTagName("TD")[0];
+        y = rows[i + 1].getElementsByTagName("TD")[0];
+        //check if the two rows should switch place:
+        if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            //if so, mark as a switch and break the loop:
+            shouldSwitch = true;
+            break;
+        }
+        }
+        if (shouldSwitch) {
+        /*If a switch has been marked, make the switch
+        and mark that a switch has been done:*/
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+        }
     }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
     }
-  }
-}
 </script>
 </body>
 

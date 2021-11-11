@@ -195,11 +195,32 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-item <?= ($activePage == 'ranking_subject') ? 'active': ''; ?>">
-                    <a href="ranking_subject.php" class='sidebar-link'>
-                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                <li class="sidebar-item has-sub <?= (
+                    $activePage == 'ranking_subject' ||
+                    $activePage == 'ranking_subject_class' ||
+                    $activePage == 'ranking_subject_subject' ||
+                    $activePage == 'ranking_subject_student') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-graph-up"></i>
                         <span>Ranking by Subject</span>
                     </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'ranking_subject') ? 'active': ''; ?> ">
+                            <a href="ranking_subject.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
                 </li>
 
                 <li class="sidebar-title">Settings</li>

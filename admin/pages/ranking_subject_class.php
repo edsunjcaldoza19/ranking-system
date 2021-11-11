@@ -24,7 +24,7 @@
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Layout Vertical Navbar</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Ranking by Subject</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -58,6 +58,7 @@
                                             echo " - ";
                                             echo $fetchClass['s_name'];
                                             ?></h4>
+                                            <label>Adviser: <?php echo $fetchClass['staff_name']; ?></label>
                                             <hr>
                                             <?php
                                                 $image = (!empty($fetchClass['staff_image'])) ? '../../images/staff/'.$fetchClass['staff_image'] : '../../images/staff/default.png';
@@ -65,10 +66,11 @@
                                         <img class="img-fluid w-100" src="<?php echo $image; ?>" style="height: 350px;" alt="Card image cap">
                                         </div>
 
+
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
                                         <span>Select this class</span>
-                                        <a href="ranking_class_student.php?sy_id=<?php echo $_GET['sy_id']; ?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $fetchClass['id']; ?>" class="btn btn-primary">Select</a>
+                                        <a href="ranking_subject_subject.php?sy_id=<?php echo $_GET['sy_id']; ?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $fetchClass['id']; ?>" class="btn btn-primary">Select</a>
                                     </div>
                                 </div>
                             </div>
