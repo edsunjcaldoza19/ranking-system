@@ -20,14 +20,14 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Select Subject</h3>
-                                <p class="text-subtitle text-muted">Select Subject to continue browsing the grades of students</p>
+                                <h3>Student Grade</h3>
+                                <p class="text-subtitle text-muted">Displays Student Record</p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Subjects</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Grades</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -40,43 +40,49 @@
                     <section class="section">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Subject List</h3>
+                                <?php
+                                            //GET Subject ID using GET METHOD
+                                            $subjectID = $_GET['subject_id'];
+                                            //FETCH tbl_grade
+                                            $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
+
+                                            LEFT JOIN tbl_subject_details ON
+                                            tbl_subject_details.id=tbl_subject.subject_id
+
+                                            WHERE tbl_subject.id = $subjectID");
+                                            $sql->execute();
+                                            $fetch = $sql->fetch();
+                                        ?>
+                                <h3><?php echo $fetch['subject_name']; ?></h3>
                             </div>
                             <div class="card-body">
                                 <table class="table" id="table1">
                                     <thead>
                                         <tr>
-                                            <th>Subject Name</th>
-                                            <th style="width: 20%;">Select</th>
+                                            <th>Student Name</th>
+                                            <th>Grade</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- Populate table with db data -->
                                         <?php
-
-                                            $getSchoolYear = $_GET['sy_id'];
-                                            $getClassID = $_GET['class_id'];
-                                            require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_subject_details.id FROM tbl_subject_details
+                                            //GET Subject ID using GET METHOD
+                                            $subjectID = $_GET['subject_id'];
+                                            //FETCH tbl_grade
+                                            $sql = $conn->prepare("SELECT *, tbl_grade.id FROM tbl_grade
                                             LEFT JOIN tbl_subject ON
-                                            tbl_subject.subject_id = tbl_subject_details.id
-                                            LEFT JOIN tbl_class ON
-                                            tbl_class.id=tbl_subject.subject_class_id
-                                            LEFT JOIN tbl_section ON
-                                            tbl_section.id=tbl_class.class_section
-                                            LEFT JOIN tbl_grade_level ON
-                                            tbl_grade_level.id=tbl_section.s_grade_level
-                                            WHERE `class_sy` = $getSchoolYear
-                                            AND `subject_class_id` = $getClassID");
+                                            tbl_subject.id=tbl_grade.grade_subject_id
+                                            LEFT JOIN tbl_subject_details ON
+                                            tbl_subject_details.id=tbl_subject.subject_id
+                                            LEFT JOIN tbl_student ON
+                                            tbl_student.id=tbl_grade.grade_stud_id
+                                            WHERE `grade_subject_id` = $subjectID");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                             <tr>
-                                                <td><?php echo $fetch['subject_name']?></td>
-                                                <td>
-                                                    <a href="overall_subject_student.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['subject_id'];?>"
-                                                    class="btn btn-primary btn rounded-pill mt-2">Select</a>
-                                                </td>
+                                                <td><?php echo $fetch['stud_name']?></td>
+                                                <td><?php echo $fetch['grade']?></td>
                                             </tr>
                                         <?php
                                             };

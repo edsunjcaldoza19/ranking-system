@@ -20,8 +20,8 @@
                     <div class="page-title">
                         <div class="row">
                             <div class="col-12 col-md-6 order-md-1 order-last">
-                                <h3>Select Subject</h3>
-                                <p class="text-subtitle text-muted">Select Subject to continue browsing the grades of students</p>
+                                <h3>Select Quarter</h3>
+                                <p class="text-subtitle text-muted">Select Quarter to continue browsing the classes</p>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -40,12 +40,13 @@
                     <section class="section">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Subject List</h3>
+                                <h3>Class List</h3>
                             </div>
                             <div class="card-body">
                                 <table class="table" id="table1">
                                     <thead>
                                         <tr>
+                                            <th>Class</th>
                                             <th>Subject Name</th>
                                             <th style="width: 20%;">Select</th>
                                         </tr>
@@ -53,28 +54,40 @@
                                     <tbody>
                                         <!-- Populate table with db data -->
                                         <?php
-
+                                            //Fetch Staff ID using Session
+                                            $getStaffID = $_SESSION['staff_id'];
                                             $getSchoolYear = $_GET['sy_id'];
-                                            $getClassID = $_GET['class_id'];
+                                            $getQuarterID = $_GET['quarter_id'];
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_subject_details.id FROM tbl_subject_details
-                                            LEFT JOIN tbl_subject ON
-                                            tbl_subject.subject_id = tbl_subject_details.id
+                                            $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
+                                            LEFT JOIN tbl_quarter ON
+                                            tbl_quarter.id=tbl_subject.subject_quarter_id
+
+                                            LEFT JOIN tbl_subject_details ON
+                                            tbl_subject_details.id=tbl_subject.subject_id
+
                                             LEFT JOIN tbl_class ON
                                             tbl_class.id=tbl_subject.subject_class_id
                                             LEFT JOIN tbl_section ON
                                             tbl_section.id=tbl_class.class_section
                                             LEFT JOIN tbl_grade_level ON
                                             tbl_grade_level.id=tbl_section.s_grade_level
-                                            WHERE `class_sy` = $getSchoolYear
-                                            AND `subject_class_id` = $getClassID");
+
+                                            WHERE `subject_teacher` = $getStaffID
+                                            AND `subject_quarter_id` = $getQuarterID
+                                            AND `class_sy` = $getSchoolYear");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                             <tr>
+                                                <td>
+                                                    <?php echo $fetch['gl_grade_level']?>
+                                                    <?php echo " - "?>
+                                                    <?php echo $fetch['s_name']?>
+                                                </td>
                                                 <td><?php echo $fetch['subject_name']?></td>
                                                 <td>
-                                                    <a href="overall_subject_student.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['subject_id'];?>"
+                                                    <a href="class_grade.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $fetch['subject_class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
                                                     class="btn btn-primary btn rounded-pill mt-2">Select</a>
                                                 </td>
                                             </tr>
