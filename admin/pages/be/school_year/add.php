@@ -5,9 +5,10 @@
 	if(ISSET($_POST['add'])){
 		try{
 			$schoolYear = $_POST['schoolYear'];
+			$syStatus = $_POST['syStatus'];
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO tbl_school_year(`sy_school_year`)
-            VALUES('$schoolYear')";
+			$sql = "INSERT INTO tbl_school_year(`sy_school_year`, `sy_status`)
+            VALUES('$schoolYear', '$syStatus')";
 			$conn->exec($sql);
 		}catch(PDOException $e){
 			echo $e->getMessage();

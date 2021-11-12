@@ -18,6 +18,21 @@
                             <label>School Year</label>
                             <input type="text" class="form-control" name="schoolYear" placeholder="Enter School Year (example: 2020-2021)">
                         </div>
+                        <div class="form-group">
+                            <label>Set Active Status</label>
+                            <div class="form-check form-check-success">
+                                <input class="form-check-input" value="Active" type="radio" name="syStatus" id="flexRadioDefault1" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Active
+                                </label>
+                            </div>
+                            <div class="form-check form-check-danger">
+                                <input class="form-check-input" value="Not Active" type="radio" name="syStatus" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Not Active
+                                </label>
+                            </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                         <button type="button" class="btn btn-light-secondary"

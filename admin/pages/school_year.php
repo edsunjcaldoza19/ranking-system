@@ -50,6 +50,7 @@
                                     <thead>
                                         <tr>
                                             <th>School year</th>
+                                            <th>Status</th>
                                             <th style="width: 20%;">Update</th>
                                             <th style="width: 20%;">Delete</th>
                                         </tr>
@@ -64,11 +65,21 @@
                                         ?>
                                             <tr>
                                                 <td><?php echo $fetch['sy_school_year']?></td>
-                                                <td>
+                                                <td class="text-center" ><div class="
+                                                <?php if($fetch['sy_status'] == "Active")
+                                                    {
+                                                        echo "alert alert-success";
+                                                    }
+                                                    else{
+                                                        echo "alert alert-danger";
+                                                    }
+                                                ?>">
+                                                <?php echo $fetch['sy_status']?></div></td>
+                                                <td  class="text-center">
                                                     <button class="btn btn-primary btn rounded-pill" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $fetch['id']?>">Update</button>
                                                 </td>
 
-                                                <td>
+                                                <td class="text-center">
                                                     <button class="btn btn-danger btn rounded-pill" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $fetch['id']?>">Delete</button>
                                                 </td>
                                             </tr>
