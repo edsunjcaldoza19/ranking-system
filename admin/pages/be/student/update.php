@@ -11,10 +11,14 @@
 			$studDateBirth = $_POST['studDateBirth'];
 			$studAddress = $_POST['studAddress'];
 
+			$studPassword = $_POST['studIDNum'];
+			$studUsername = $_POST['studIDNum'];
+
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE `tbl_student` SET `stud_id_num`='$studIDNum',
 			`stud_name`='$studName',`stud_sex`='$studSex',
-			`stud_date_birth`='$studDateBirth',`stud_address`='$studAddress'
+			`stud_date_birth`='$studDateBirth',`stud_address`='$studAddress',
+			`stud_password` = '$studPassword', `stud_username` = '$studUsername'
 			WHERE `id` = '$id'";
 			$conn->exec($sql);
 		}catch(PDOException $e){

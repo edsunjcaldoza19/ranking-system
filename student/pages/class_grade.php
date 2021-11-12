@@ -76,15 +76,17 @@
                                             $sql = $conn->prepare("SELECT *, tbl_grade.id FROM tbl_grade
                                             LEFT JOIN tbl_subject ON
                                             tbl_subject.id=tbl_grade.grade_subject_id
+                                            LEFT JOIN tbl_subject_details ON
+                                            tbl_subject_details.id=tbl_subject.subject_id
                                             LEFT JOIN tbl_student ON
-                                            tbl_student.id=tbl_grade.grade_stud_id
-                                            WHERE `grade_subject_id` = $subjectID");
+                                            tbl_student.id=tbl_grade.grade_stud_id");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                             <tr>
                                                 <td><?php echo $fetch['stud_name']?></td>
                                                 <td><?php echo $fetch['grade']?></td>
+                                                <td><?php echo $fetch['subject_name']?></td>
                                                 <td>
                                                     <button class="btn btn-primary btn rounded-pill" data-bs-toggle="modal" data-bs-target="#updateModal<?php echo $fetch['id']?>">Update</button>
                                                 </td>

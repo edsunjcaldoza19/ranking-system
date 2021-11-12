@@ -46,49 +46,46 @@
                                 <table class="table" id="table1">
                                     <thead>
                                         <tr>
-                                            <th>Class</th>
                                             <th>Subject Name</th>
-                                            <th style="width: 20%;">Select</th>
+                                            <th>Grade</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <!-- Populate table with db data -->
                                         <?php
                                             //Fetch Staff ID using Session
-                                            $getStaffID = $_SESSION['staff_id'];
-                                            $getSchoolYear = $_GET['sy_id'];
+                                            $getStudentID = $_SESSION['student_id'];
+                                            $getClassID = $_GET['class_id'];
                                             $getQuarterID = $_GET['quarter_id'];
                                             require 'be/database/db_pdo.php';
-                                            $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
-                                            LEFT JOIN tbl_quarter ON
-                                            tbl_quarter.id=tbl_subject.subject_quarter_id
-
+                                            $sql = $conn->prepare("SELECT *, tbl_grade.id FROM tbl_grade
+                                            LEFT JOIN tbl_subject ON
+                                            tbl_subject.id=tbl_grade.grade_subject_id
                                             LEFT JOIN tbl_subject_details ON
                                             tbl_subject_details.id=tbl_subject.subject_id
 
-                                            LEFT JOIN tbl_class ON
-                                            tbl_class.id=tbl_subject.subject_class_id
-                                            LEFT JOIN tbl_section ON
-                                            tbl_section.id=tbl_class.class_section
-                                            LEFT JOIN tbl_grade_level ON
-                                            tbl_grade_level.id=tbl_section.s_grade_level
+                                            LEFT JOIN tbl_student ON
+                                            tbl_student.id=tbl_grade.grade_stud_id
 
-                                            WHERE `subject_teacher` = $getStaffID
-                                            AND `subject_quarter_id` = $getQuarterID
-                                            AND `class_sy` = $getSchoolYear");
+                                            WHERE `subject_quarter_id` = $getQuarterID
+                                            AND `subject_class_id` = $getClassID
+                                            AND `grade_stud_id` = $getStudentID");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
                                         ?>
                                             <tr>
-                                                <td>
-                                                    <?php echo $fetch['gl_grade_level']?>
-                                                    <?php echo " - "?>
-                                                    <?php echo $fetch['s_name']?>
-                                                </td>
                                                 <td><?php echo $fetch['subject_name']?></td>
+                                                <td><?php echo $fetch['grade']?></td>
                                                 <td>
-                                                    <a href="class_grade.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $fetch['subject_class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
-                                                    class="btn btn-primary btn rounded-pill mt-2">Select</a>
+                                                    <?php
+                                                    if($fetch['grade'] >= '75'){
+                                                        echo('<span class="badge bg-success">Passed</span>');
+                                                    }
+                                                    else{
+                                                        echo('<span class="badge bg-danger">Failed</span>');
+                                                    }
+                                                    ?>
                                                 </td>
                                             </tr>
                                         <?php

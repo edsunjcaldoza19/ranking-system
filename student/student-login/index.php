@@ -50,6 +50,7 @@
 						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
+					<small>By default, your username and password is your Student ID number</small>
 
 					<div class="container-login100-form-btn">
 						<button name="login" class="login100-form-btn">

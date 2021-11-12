@@ -53,12 +53,7 @@
                                     <tbody>
                                         <!-- populate table with db data -->
                                         <?php
-                                            //Fetch Staff ID
-                                            $getStaffID = $_SESSION['staff_id'];
                                             require 'be/database/db_pdo.php';
-
-
-
                                             $sql = $conn->prepare("SELECT * FROM tbl_quarter");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
@@ -66,7 +61,7 @@
                                             <tr>
                                                 <td><?php echo $fetch['q_quarter']?></td>
                                                 <td>
-                                                    <a href="class_subject.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $fetch['id']; ?>"
+                                                    <a href="class_subject.php?class_id=<?php echo $_GET['class_id'];?>&&quarter_id=<?php echo $fetch['id']; ?>"
                                                     class="btn btn-primary btn rounded-pill mt-2">Select Quarter</a>
                                                 </td>
                                             </tr>
