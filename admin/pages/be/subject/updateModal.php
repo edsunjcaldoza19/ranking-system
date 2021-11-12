@@ -16,8 +16,19 @@
                 <div class="modal-body">
                     <input type="hidden" name="id" value="<?php echo $fetch['id']?>">
                     <div class="form-group">
-                        <label>Subject Name</label>
-                        <input class="form-control" value="<?php echo $fetch['subject_name']; ?>" type="text" name="subjectName" placeholder="Enter Subject Name">
+                    <label>Subject Name</label>
+                            <select class="form-select" name="subjectName">
+                            <?php
+                                require 'be/database/db_pdo.php';
+                                $sqlSubject = $conn->prepare("SELECT * FROM `tbl_subject_details`");
+                                $sqlSubject->execute();
+                                while($fetchSubject = $sqlSubject->fetch()){
+                            ?>
+                                <option value="<?php echo $fetchSubject['id'] ?>"><?php echo $fetchSubject['subject_name'] ?></option>
+                            <?php
+                                }
+                            ?>
+                            </select>
                     </div>
                         <div class="form-group">
                             <label>Subject Teacher</label>

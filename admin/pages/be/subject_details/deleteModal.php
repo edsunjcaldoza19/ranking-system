@@ -4,9 +4,9 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
         role="document">
             <div class="modal-content">
-            <form action="be/subject/delete.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&quarter_id=<?php echo $_GET['quarter_id'];?>" method="POST" enctype="multipart/form-data">
+            <form action="be/subject_details/delete.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-header bg-danger">
-                        <h5 class="modal-title white" id="myModalLabel110">Delete Subject
+                        <h5 class="modal-title white" id="myModalLabel110">Delete Subject Details
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">

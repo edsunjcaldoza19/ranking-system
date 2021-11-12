@@ -92,6 +92,10 @@
                                             $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
                                             LEFT JOIN tbl_class ON
                                             tbl_class.id=tbl_subject.subject_class_id
+
+                                            LEFT JOIN tbl_subject_details ON
+                                            tbl_subject_details.id=tbl_subject.subject_id
+
                                             LEFT JOIN tbl_quarter ON
                                             tbl_quarter.id=tbl_subject.subject_quarter_id
                                             LEFT JOIN tbl_account_staff ON

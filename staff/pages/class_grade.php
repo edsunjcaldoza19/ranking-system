@@ -44,8 +44,10 @@
                                             //GET Subject ID using GET METHOD
                                             $subjectID = $_GET['subject_id'];
                                             //FETCH tbl_grade
-                                            $sql = $conn->prepare("SELECT * FROM tbl_subject
-                                            WHERE `id` = $subjectID");
+                                            $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
+                                            LEFT JOIN tbl_subject_details
+                                            ON tbl_subject_details.id = tbl_subject.subject_id
+                                            WHERE tbl_subject.id = $subjectID");
                                             $sql->execute();
                                             $fetch = $sql->fetch();
                                         ?>

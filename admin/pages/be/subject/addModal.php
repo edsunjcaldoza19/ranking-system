@@ -21,8 +21,19 @@
                             ?>
                             <input type="hidden" value="<?php echo $getClassID ?>" name="subjectClass">
                             <input type="hidden" value="<?php echo $getQuarterID ?>" name="subjectQuarter">
-                            <label>Subject Name</label>
-                            <input class="form-control" type="text" name="subjectName" placeholder="Enter Subject Name">
+                            <label>Subject</label>
+                            <select class="form-select" name="subjectName">
+                            <?php
+                                require 'be/database/db_pdo.php';
+                                $sql = $conn->prepare("SELECT * FROM `tbl_subject_details`");
+                                $sql->execute();
+                                while($fetch = $sql->fetch()){
+                            ?>
+                                <option value="<?php echo $fetch['id'] ?>"><?php echo $fetch['subject_name'] ?></option>
+                            <?php
+                                }
+                            ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Subject Teacher</label>

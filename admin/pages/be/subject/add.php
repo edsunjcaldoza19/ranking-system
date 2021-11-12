@@ -11,7 +11,7 @@
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "INSERT INTO `tbl_subject`
-			(`subject_class_id`, `subject_quarter_id`, `subject_name`, `subject_teacher`)
+			(`subject_class_id`, `subject_quarter_id`, `subject_id`, `subject_teacher`)
 			VALUES ('$subjectClass','$subjectQuarter','$subjectName','$subjectTeacher')";
 			$conn->exec($sql);
 		}catch(PDOException $e){

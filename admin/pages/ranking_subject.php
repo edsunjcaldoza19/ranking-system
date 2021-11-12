@@ -43,15 +43,15 @@
                                 while($fetch = $sql->fetch()){
                             ?>
 
+
                             <div class="col-xl-4 col-md-6 col-sm-12">
                                 <div class="card">
                                     <div class="card-content">
                                         <div class="card-body">
-                                            <h4 class="card-title">HTC-RANK</h4>
-                                            <hr>
                                             <h4><?php echo $fetch['q_quarter']; ?></h4>
+                                            <hr>
                                         </div>
-                                        <img class="img-fluid w-100" src="../../images/card-img.png" style="height: 350px;" alt="Card image cap">
+                                        <img class="img-fluid w-100" src="../../images/card-img.png" style="height: 250px;" alt="Card image cap">
                                     </div>
                                     <div class="card-footer d-flex justify-content-between">
                                         <span>Select this quarter</span>

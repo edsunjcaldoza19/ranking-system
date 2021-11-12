@@ -121,10 +121,17 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item <?= ($activePage == 'subject_details') ? 'active': ''; ?>">
+                    <a href="subject_details.php" class='sidebar-link'>
+                        <i class="bi bi-bookmark-fill"></i>
+                        <span>Subject Details</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item has-sub <?= ($activePage == 'subject') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-book-fill"></i>
-                        <span>Subjects</span>
+                        <span>Assign Subjects</span>
                     </a>
                     <ul class="submenu ">
                     <li>
@@ -147,7 +154,11 @@
 
                 <li class="sidebar-title">Statistics</li>
 
-                <li class="sidebar-item has-sub <?= ($activePage == 'grade') ? 'active': ''; ?>">
+                <li class="sidebar-item has-sub <?= (
+                    $activePage == 'grade' ||
+                    $activePage == 'grade_class' ||
+                    $activePage == 'grade_student' ||
+                    $activePage == 'grade_subject') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
                         <span>Grade</span>
@@ -171,10 +182,40 @@
                     </ul>
                 </li>
 
-                <li class="sidebar-item has-sub <?= ($activePage == 'ranking_class') ? 'active': ''; ?>">
+                <li class="sidebar-item has-sub <?= (
+                    $activePage == 'ranking_class' ||
+                    $activePage == 'ranking_class_sel_class' ||
+                    $activePage == 'ranking_class_student') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-bar-chart-fill"></i>
                         <span>Ranking by Class</span>
+                    </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'grade') ? 'active': ''; ?> ">
+                            <a href="ranking_class.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item has-sub <?= (
+                    $activePage == 'ranking_class' ||
+                    $activePage == 'ranking_class_sel_class' ||
+                    $activePage == 'ranking_class_student') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-text-fill"></i>
+                        <span>Overall Rank Class</span>
                     </a>
                     <ul class="submenu ">
                     <li>
@@ -214,6 +255,33 @@
                         ?>
                         <li class="submenu-item <?= ($activePage == 'ranking_subject') ? 'active': ''; ?> ">
                             <a href="ranking_subject.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item has-sub <?= (
+                    $activePage == 'overall_subject' ||
+                    $activePage == 'overall_subject_subject' ||
+                    $activePage == 'overall_subject_student') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Overall Rank Subject</span>
+                    </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'overall_subject') ? 'active': ''; ?> ">
+                            <a href="overall_subject.php?sy_id=<?php echo $fetch['id']; ?>">
                                 <?php echo $fetch['sy_school_year']; ?>
                             </a>
                         </li>

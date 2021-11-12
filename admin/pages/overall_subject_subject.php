@@ -55,14 +55,13 @@
                                         <?php
 
                                             $getSchoolYear = $_GET['sy_id'];
-                                            $getQuarterID = $_GET['quarter_id'];
                                             $getClassID = $_GET['class_id'];
                                             require 'be/database/db_pdo.php';
                                             $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
                                             LEFT JOIN tbl_quarter ON
                                             tbl_quarter.id=tbl_subject.subject_quarter_id
 
-                                            LEFT JOIN tbl_subject_details ON
+                                            LEFT OUTER JOIN tbl_subject_details ON
                                             tbl_subject_details.id=tbl_subject.subject_id
 
                                             LEFT JOIN tbl_class ON
@@ -72,8 +71,7 @@
                                             LEFT JOIN tbl_grade_level ON
                                             tbl_grade_level.id=tbl_section.s_grade_level
 
-                                            WHERE `subject_quarter_id` = $getQuarterID
-                                            AND `class_sy` = $getSchoolYear
+                                            WHERE `class_sy` = $getSchoolYear
                                             AND `subject_class_id` = $getClassID");
                                             $sql->execute();
                                             while($fetch = $sql->fetch()){
@@ -81,7 +79,7 @@
                                             <tr>
                                                 <td><?php echo $fetch['subject_name']?></td>
                                                 <td>
-                                                    <a href="ranking_subject_student.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
+                                                    <a href="overall_subject_student.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['subject_id'];?>"
                                                     class="btn btn-primary btn rounded-pill mt-2">Select</a>
                                                 </td>
                                             </tr>

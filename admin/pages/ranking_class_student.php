@@ -75,27 +75,13 @@
                                                 <tbody>
                                                     <?php
                                                     $getClassID = $_GET['class_id'];
-                                                    //FETCH tbl_grade
-                                                    /*
-                                                    $sql = $conn->prepare("SELECT *, tbl_grade.id FROM tbl_grade
-                                                    LEFT JOIN tbl_subject ON
-                                                    tbl_subject.id=tbl_grade.grade_subject_id
-                                                    LEFT JOIN tbl_student ON
-                                                    tbl_student.id=tbl_grade.grade_stud_id
-                                                    LEFT JOIN tbl_class ON
-                                                    tbl_class.id=tbl_subject.subject_class_id
-                                                    WHERE tbl_subject.subject_class_id = $getClassID");
-                                                    $sql->execute();
-                                                    //Initialize Rank Variable
-                                                    $rankCounter = 0;
-                                                    while($fetch = $sql->fetch()){
-                                                        $rankCounter++;
-                                                    */
                                                     ?>
                                                     <?php
                                                     $sqlPopClass = $conn->prepare("SELECT *, tbl_populate_class.id
                                                     FROM tbl_populate_class
-                                                    LEFT JOIN tbl_student ON tbl_student.id = tbl_populate_class.pop_stud_id
+                                                    LEFT JOIN tbl_student ON
+                                                    tbl_student.id = tbl_populate_class.pop_stud_id
+
                                                     WHERE pop_class_id = $getClassID");
                                                     $sqlPopClass->execute();
                                                     $rankCounter = 0;
@@ -117,37 +103,6 @@
                                                         <?php
                                                             }
                                                         ?>
-                                                    </tr>
-                                                    <?php
-                                                    }
-                                                    ?>
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="table-responsive">
-                                            <table class="table table-striped mb-0" id="myTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>RANK</th>
-                                                        <th>NAME</th>
-                                                        <th>AVERAGE</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $getClassID = $_GET['class_id'];
-                                                    ?>
-                                                    <?php
-                                                    $sqlClass2 = $conn->prepare("SELECT AVG(grade) FROM tbl_grade
-                                                    ORDER BY AVG(grade) DESC");
-                                                    $sqlClass2->execute();
-                                                    while($fetchClass2 = $sqlClass2->fetch()){
-                                                    ?>
-                                                    <tr>
-                                                        <td><?php echo $rankCounter; ?></td>
-                                                        <td class="text-bold-500"><?php echo $fetchClass2['AVG(grade)']; ?></td>
-
                                                     </tr>
                                                     <?php
                                                     }
