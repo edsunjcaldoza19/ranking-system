@@ -24,25 +24,13 @@
                 <li class="sidebar-item <?= ($activePage == 'school_year') ? 'active': ''; ?>">
                     <a href="school_year.php" class='sidebar-link'>
                         <i class="bi bi-calendar-date-fill"></i>
-                        <?php
-                            include 'be/database/db_pdo.php';
-                            $query = "SELECT * FROM tbl_school_year";
-                            $result=$conn->query($query);
-                            $count = $result->rowCount();
-                        ?>
-                        <span>School Year</span><span class="badge bg-success"><?php echo $count; ?></span>
+                        <span>School Year</span>
                     </a>
                 </li>
                 <li class="sidebar-item <?= ($activePage == 'quarter') ? 'active': ''; ?>">
                     <a href="quarter.php" class='sidebar-link'>
                         <i class="bi bi-calendar-event-fill"></i>
-                        <?php
-                            include 'be/database/db_pdo.php';
-                            $query = "SELECT * FROM tbl_quarter";
-                            $result=$conn->query($query);
-                            $count = $result->rowCount();
-                        ?>
-                        <span>Quarters</span><span class="badge bg-success"><?php echo $count; ?></span>
+                        <span>Quarters</span>
                     </a>
                 </li>
 
