@@ -61,7 +61,7 @@
                                                 Please upload your picture here
                                             </label>
                                             <!-- Basic file uploader -->
-                                            <input type="file" name="studImage" class="form-control"
+                                            <input type="file" accept="image/*" name="studImage" class="form-control"
                                             onchange="previewImage(event)">
                                         </div>
                                         <div class="form-group">

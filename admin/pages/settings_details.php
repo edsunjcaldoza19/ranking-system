@@ -63,7 +63,7 @@
                                                 Please upload a picture here
                                             </label>
                                             <!-- Basic file uploader -->
-                                            <input type="file" name="schoolLogo" class="form-control"
+                                            <input type="file" accept="image/*" name="schoolLogo" class="form-control"
                                             onchange="previewImage(event)">
                                         </div>
                                         <div class="form-group">

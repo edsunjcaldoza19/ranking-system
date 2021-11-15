@@ -54,7 +54,7 @@
                                                 Please upload the picture of the employee.
                                             </label>
                                             <!-- Basic file uploader -->
-                                            <input type="file" name="staffImage" class="form-control"
+                                            <input type="file" accept="image/*" name="staffImage" class="form-control"
                                             onchange="previewImage(event)">
                                         </div>
                                         <div class="form-group">
