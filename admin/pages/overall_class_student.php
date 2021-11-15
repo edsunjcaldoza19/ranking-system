@@ -90,7 +90,7 @@
                                                     ?>
                                                     <tr>
                                                         <?php
-                                                            $sqlClass = $conn->prepare("SELECT AVG(grade) FROM tbl_grade
+                                                            $sqlClass = $conn->prepare("SELECT CAST(AVG(grade) AS DECIMAL (10,2)) FROM tbl_grade
                                                             LEFT JOIN tbl_subject ON
                                                             tbl_subject.id = tbl_grade.grade_subject_id
                                                             WHERE grade_stud_id = $fetchStudentID
@@ -100,7 +100,7 @@
                                                             while($fetchClass = $sqlClass->fetch()){
                                                         ?>
                                                         <td><?php echo $rankCounter;?></td>
-                                                        <td class="text-bold-500"><?php echo $fetchClass['AVG(grade)']; ?></td>
+                                                        <td class="text-bold-500"><?php echo $fetchClass['CAST(AVG(grade) AS DECIMAL (10,2))']; ?></td>
                                                         <td class="text-bold-500"><?php echo $fetchPopClass['stud_name']; ?></td>
                                                         <?php
                                                             }

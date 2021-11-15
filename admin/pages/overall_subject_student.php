@@ -67,7 +67,7 @@
                                             //GET Subject ID using GET METHOD
                                             $subjectID = $_GET['subject_id'];
                                             //FETCH tbl_grade
-                                            $sql = $conn->prepare("SELECT AVG(grade), tbl_student.id,
+                                            $sql = $conn->prepare("SELECT CAST(AVG(grade) AS DECIMAL (10,2)), tbl_student.id,
                                             tbl_student.stud_name, tbl_grade.id FROM tbl_grade
                                             LEFT JOIN tbl_subject ON
                                             tbl_subject.id=tbl_grade.grade_subject_id
@@ -83,7 +83,7 @@
                                             <tr>
                                                 <td><?php echo $rankCounter;?></td>
                                                 <td><?php echo $fetch['stud_name']?></td>
-                                                <td><?php echo $fetch['AVG(grade)']?></td>
+                                                <td><?php echo $fetch['CAST(AVG(grade) AS DECIMAL (10,2))']?></td>
                                             </tr>
                                         <?php
                                             };
