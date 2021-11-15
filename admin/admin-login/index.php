@@ -39,6 +39,7 @@
 
 					<span class="login100-form-title p-b-34 p-t-27">
 						Admin | Log in
+						<p class="text-white">Only Accounts that are already registered will be able to access the system.</p>
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">

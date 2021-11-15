@@ -186,7 +186,7 @@ iframe {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.9);
+  background-color: #0b223fb2;
 }
 
 .wrap-login100 {
@@ -196,8 +196,9 @@ iframe {
   padding: 55px 55px 37px 55px;
 
   background: #9152f8;
-  background-color: #045de9;
-background-image: linear-gradient(315deg, #045de9 0%, #09c6f9 74%);
+  background-color: #537895;
+  background-image: linear-gradient(315deg, #263742 0%, #08182c 74%);
+
 }
 
 

@@ -39,7 +39,9 @@
 
 					<span class="login100-form-title p-b-34 p-t-27">
 						Student | Log in
+						<p class="text-white">Only Accounts that are already registered will be able to access the system.</p>
 					</span>
+
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="username" placeholder="Username">
@@ -50,7 +52,7 @@
 						<input class="input100" type="password" name="password" placeholder="Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
-					<small>By default, your username and password is your Student ID number</small>
+					<p class="text-white">By default, your username and password is your Student ID number</p>
 
 					<div class="container-login100-form-btn">
 						<button name="login" class="login100-form-btn">
