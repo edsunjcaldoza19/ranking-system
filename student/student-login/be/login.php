@@ -20,14 +20,14 @@
 			// md5 encrypted
 			// $password = md5($_POST['password']);
 			$password = $_POST['password'];
-			$sql = "SELECT * FROM `tbl_student` WHERE `stud_id_num`=? AND `stud_password`=? ";
+			$sql = "SELECT * FROM `tbl_student` WHERE `stud_username`=? AND `stud_password`=? ";
 			$query = $conn->prepare($sql);
 			$query->execute(array($username,$password));
 			$row = $query->rowCount();
 			$fetch = $query->fetch();
 			if($row > 0) {
 				$_SESSION['student_id'] = $fetch['id'];
-                $_SESSION['student_username'] = $fetch['stud_id_num'];
+                $_SESSION['student_username'] = $fetch['stud_username'];
                 $_SESSION['student_password'] = $fetch['stud_password'];
 				echo '
 					<script>

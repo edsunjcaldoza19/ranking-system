@@ -24,6 +24,15 @@
                                     </ul>
                                 </li>
                             </ul>
+                            <?php
+                                    //Fetch Admin Account from Database
+                                    $studentID = $_SESSION['student_id'];
+                                    require 'be/database/db_pdo.php';
+                                    $sql = $conn->prepare("SELECT * FROM tbl_student
+                                    WHERE id='$studentID'");
+                                    $sql->execute();
+                                    $fetchStudent = $sql->fetch();
+                                ?>
                             <div class="dropdown">
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
@@ -33,7 +42,10 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="../../assets/images/faces/1.jpg">
+                                            <?php
+                                                $image = (!empty($fetchStudent['stud_img'])) ? '../../images/student/'.$fetchStudent['stud_img'] : '../../images/student/default.png';
+                                            ?>
+                                                <img src="<?php echo $image; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -42,10 +54,8 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                                    <li><a class="dropdown-item" href="account_settings.php"><i class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                            Settings</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login | Staff Account</title>
+	<title>Login | Student Account</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="../../images/grades.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -38,7 +38,7 @@
 					</span>
 
 					<span class="login100-form-title p-b-34 p-t-27">
-						Staff | Log in
+						Student | Log in
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">

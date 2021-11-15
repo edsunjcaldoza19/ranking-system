@@ -39,7 +39,7 @@
                     <section class="section">
                         <div class="row">
                              <!-- populate table with db data -->
-                             <?php
+                            <?php
                                 require 'be/database/db_pdo.php';
                                 $sql = $conn->prepare("SELECT * FROM `tbl_account_staff`");
                                 $sql->execute();

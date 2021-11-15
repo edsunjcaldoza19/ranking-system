@@ -75,10 +75,10 @@
                                         <div class="form-group">
                                              <!-- Load IMAGE filename -->
                                              <input type="hidden" name="oldImage" value="<?php echo $fetchAdmin['admin_image']; ?>">
-                                                    <?php
+
+                                            <div class="co<?php
                                                         $image = (!empty($fetchAdmin['admin_image'])) ? '../../images/admin/'.$fetchAdmin['admin_image'] : '../../images/admin/default.png';
-                                                    ?>
-                                            <div class="col-md-12 text-center">
+                                                    ?>l-md-12 text-center">
                                                 <img src="<?php echo $image; ?>" id="preview"  width="350px" height="350px" style="border: 2px solid; border-radius: 100%;"/>
                                             </div>
                                         </div>

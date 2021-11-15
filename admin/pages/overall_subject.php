@@ -37,6 +37,9 @@
                         <div class="row">
                              <!-- populate table with db data -->
                              <?php
+                                /** Fetch School Year */
+                                $schoolYearID = $_GET['sy_id'];
+
                                 require 'be/database/db_pdo.php';
                                 $sqlClass = $conn->prepare("SELECT *, tbl_class.id FROM tbl_class
                                 LEFT JOIN tbl_section ON
@@ -44,7 +47,8 @@
                                 LEFT JOIN tbl_grade_level ON
                                 tbl_grade_level.id=tbl_section.s_grade_level
                                 LEFT JOIN tbl_account_staff ON
-                                tbl_account_staff.id=tbl_class.class_adviser");
+                                tbl_account_staff.id=tbl_class.class_adviser
+                                WHERE class_sy = '$schoolYearID'");
                                 $sqlClass->execute();
                                 while($fetchClass = $sqlClass->fetch()){
                             ?>

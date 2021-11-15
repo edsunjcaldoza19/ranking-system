@@ -24,7 +24,7 @@
 
                 <li class="sidebar-title">Subject Teacher</li>
 
-                <li class="sidebar-item has-sub <?= ($activePage == 'class_quarter' || $activePage == 'populate_class_student') ? 'active': ''; ?>">
+                <li class="sidebar-item has-sub <?= ($activePage == 'class_quarter' || $activePage == 'class_subject') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
                         <span>Browse Classes</span>
@@ -38,7 +38,7 @@
                             $sql->execute();
                             while($fetch = $sql->fetch()){
                         ?>
-                        <li class="submenu-item <?= ($activePage == 'class_quarter' || $activePage == 'populate_class_student') ? 'active': ''; ?> ">
+                        <li class="submenu-item <?= ($activePage == 'class_quarter' || $activePage == 'class_subject') ? 'active': ''; ?> ">
                             <a href="class_quarter.php?sy_id=<?php echo $fetch['id']; ?>">
                                 <?php echo $fetch['sy_school_year']; ?>
                             </a>
@@ -92,7 +92,14 @@
                         <span>Ranking by Subject</span>
                     </a>
                 </li>
+                <li class="sidebar-title">Settings</li>
 
+                <li class="sidebar-item <?= ($activePage == 'account_settings') ? 'active': ''; ?>">
+                    <a href="account_settings.php" class='sidebar-link'>
+                        <i class="bi bi-gear-fill"></i>
+                        <span>Account Settings</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

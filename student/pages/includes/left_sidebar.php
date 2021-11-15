@@ -24,7 +24,7 @@
 
                 <li class="sidebar-title">Browse</li>
 
-                <li class="sidebar-item has-sub <?= ($activePage == 'class_quarter' || $activePage == 'populate_class_student') ? 'active': ''; ?>">
+                <li class="sidebar-item has-sub <?= ($activePage == 'class_quarter' || $activePage == 'class_subject') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
                         <span>My Classes</span>
@@ -49,8 +49,44 @@
                             $sql->execute();
                             while($fetch = $sql->fetch()){
                         ?>
-                        <li class="submenu-item <?= ($activePage == 'class_quarter' || $activePage == 'populate_class_student') ? 'active': ''; ?> ">
+                        <li class="submenu-item <?= ($activePage == 'class_quarter' || $activePage == 'class_subject') ? 'active': ''; ?> ">
                             <a href="class_quarter.php?class_id=<?php echo $fetch['pop_class_id']; ?>">
+                                <?php echo $fetch['gl_grade_level'];?>-<?php echo $fetch['s_name']; ?> <br> (<?php echo $fetch['sy_school_year']; ?>)
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </li>
+
+                <li class="sidebar-item has-sub <?= ($activePage == 'classmate') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-people-fill"></i>
+                        <span>My Classmates</span>
+                    </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            /**Fetch Student ID Session */
+                            $sessionStudentID = $_SESSION['student_id'];
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT *, tbl_populate_class.id
+                            FROM `tbl_populate_class`
+                            LEFT JOIN tbl_class ON
+                            tbl_class.id = tbl_populate_class.pop_class_id
+                            LEFT JOIN tbl_section ON
+                            tbl_section.id = tbl_class.class_section
+                            LEFT JOIN tbl_grade_level ON
+                            tbl_grade_level.id = tbl_section.s_grade_level
+                            LEFT JOIN tbl_school_year ON
+                            tbl_school_year.id = tbl_class.class_sy
+                            WHERE tbl_populate_class.pop_stud_id = $sessionStudentID");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'classmate') ? 'active': ''; ?> ">
+                            <a href="classmate.php?class_id=<?php echo $fetch['pop_class_id']; ?>">
                                 <?php echo $fetch['gl_grade_level'];?>-<?php echo $fetch['s_name']; ?> <br> (<?php echo $fetch['sy_school_year']; ?>)
                             </a>
                         </li>

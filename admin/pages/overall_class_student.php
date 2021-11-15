@@ -75,7 +75,6 @@
                                                 <tbody>
                                                     <?php
                                                         $getClassID = $_GET['class_id'];
-                                                        $getQuarterID = $_GET['quarter_id'];
                                                     $sqlPopClass = $conn->prepare("SELECT *, tbl_populate_class.id
                                                     FROM tbl_populate_class
                                                     LEFT JOIN tbl_student ON
@@ -96,7 +95,6 @@
                                                             tbl_subject.id = tbl_grade.grade_subject_id
                                                             WHERE grade_stud_id = $fetchStudentID
                                                             AND subject_class_id = $getClassID
-                                                            AND subject_quarter_id = $getQuarterID
                                                             ORDER BY AVG(grade) ASC");
                                                             $sqlClass->execute();
                                                             while($fetchClass = $sqlClass->fetch()){

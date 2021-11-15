@@ -25,15 +25,27 @@
                                 </li>
                             </ul>
                             <div class="dropdown">
+                                <?php
+                                    //Fetch Admin Account from Database
+                                    $adminID = $_SESSION['admin_id'];
+                                    require 'be/database/db_pdo.php';
+                                    $sql = $conn->prepare("SELECT * FROM tbl_account_admin
+                                    WHERE id='$adminID'");
+                                    $sql->execute();
+                                    $fetchAdmin = $sql->fetch();
+                                ?>
                                 <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                     <div class="user-menu d-flex">
                                         <div class="user-name text-end me-3">
-                                            <h6 class="mb-0 text-gray-600">Admin</h6>
+                                            <h6 class="mb-0 text-gray-600"><?php echo $fetchAdmin['admin_username']; ?></h6>
                                             <p class="mb-0 text-sm text-gray-600">Administrator</p>
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="../../assets/images/faces/1.jpg">
+                                                    <?php
+                                                        $image = (!empty($fetchAdmin['admin_image'])) ? '../../images/admin/'.$fetchAdmin['admin_image'] : '../../images/admin/default.png';
+                                                    ?>
+                                                <img src="<?php echo $image; ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -42,10 +54,8 @@
                                     <li>
                                         <h6 class="dropdown-header">Hello, Administrator!</h6>
                                     </li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
+                                    <li><a class="dropdown-item" href="settings_account.php"><i class="icon-mid bi bi-person me-2"></i> My
                                             Profile</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                            Settings</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

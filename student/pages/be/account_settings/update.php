@@ -63,7 +63,7 @@
 
 				Swal.fire({
 					icon: "success",
-					title: "Admin Account Successfully Updated",
+					title: "Student Account Successfully Updated",
 					timer: 3000
 				}).then(function(){
 

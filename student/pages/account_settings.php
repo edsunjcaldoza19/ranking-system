@@ -141,7 +141,7 @@
                                                                 <label for="contact-info-vertical">Username</label>
                                                                 <input type="text"  value="<?php echo $fetchStudent['stud_username']; ?>" id="contact-info-vertical" class="form-control"
                                                                     name="username" placeholder="Username">
-                                                                <small>The username will be used to login to the system as an administrator.</small>
+                                                                <small>The username will be used to login to the system</small>
                                                             </div>
                                                         </div>
                                                         <div class="col-12">

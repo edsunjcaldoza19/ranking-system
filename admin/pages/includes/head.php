@@ -1,6 +1,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTC-RANK - Administrator Account</title>
+    <title>Rank - Administrator Account</title>
 
     <link href="../../assets/fonts/nunito-typeface.css" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/bootstrap.css">
