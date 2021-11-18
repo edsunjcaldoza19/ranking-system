@@ -24,7 +24,7 @@
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Layout Vertical Navbar</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Ranking By Class</li>
                                     </ol>
                                 </nav>
                             </div>
@@ -37,8 +37,15 @@
                         <div class="row">
                              <!-- populate table with db data -->
                              <?php
-                                /** Fetch School Year */
+                             /** Fetch School Year */
                                 $schoolYearID = $_GET['sy_id'];
+
+                            /** Check if Class Exists */
+                                $query = "SELECT * FROM tbl_class WHERE class_sy = $schoolYearID";
+                                $result=$conn->query($query);
+                                $count = $result->rowCount();
+
+                                if($count != 0){
                                 require 'be/database/db_pdo.php';
                                 $sqlClass = $conn->prepare("SELECT *, tbl_class.id FROM tbl_class
                                 LEFT JOIN tbl_section ON
@@ -51,7 +58,6 @@
                                 $sqlClass->execute();
                                 while($fetchClass = $sqlClass->fetch()){
                             ?>
-
                             <div class="col-xl-4 col-md-6 col-sm-12">
                                 <div class="card">
                                     <div class="card-content">
@@ -77,8 +83,12 @@
                             </div>
                             <?php
                                 }
-                            ?>
+                            }
+                            else{
+                                echo '<img src="../../images/card-img.jpg">';
 
+                            }
+                            ?>
                         </div>
                     </section>
                     <!-- End Content Section -->

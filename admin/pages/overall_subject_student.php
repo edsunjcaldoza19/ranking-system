@@ -54,42 +54,67 @@
                                 <h3><?php echo $fetch['subject_name']; ?> - Student Overall Ranking</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-striped mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Rank</th>
-                                            <th>Student Name</th>
-                                            <th>Grade</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <?php
+                                                $getClassID = $_GET['class_id'];
+                                                $getSubjectID = $_GET['subject_id'];
+                                                $sqlPopClass = $conn->prepare("SELECT *, tbl_populate_class.id
+                                                FROM tbl_populate_class
+                                                LEFT JOIN tbl_student ON
+                                                tbl_student.id = tbl_populate_class.pop_stud_id
+
+                                                WHERE pop_class_id = $getClassID");
+                                                $sqlPopClass->execute();
+                                                //Fetch Current Student ID
+                                                while($fetchPopClass = $sqlPopClass->fetch()){
+                                                    $fetchStudentID = $fetchPopClass['pop_stud_id'];
+                                                    $sqlClass = $conn->prepare("SELECT CAST(AVG(grade) AS DECIMAL (10,2)) FROM tbl_grade
+                                                    LEFT JOIN tbl_subject ON
+                                                    tbl_subject.id = tbl_grade.grade_subject_id
+                                                    WHERE grade_stud_id = $fetchStudentID
+                                                    AND subject_class_id = $getClassID
+                                                    AND subject_id = $getSubjectID");
+                                                    $sqlClass->execute();
+                                                    while($fetchClass = $sqlClass->fetch()){
+                                                        $studentArray[] = array(
+                                                            'studentName' => $fetchPopClass['stud_name'],
+                                                            'studentGrade' => $fetchClass['CAST(AVG(grade) AS DECIMAL (10,2))']
+                                                        );
+                                                    }
+                                                }
+                                                if(!empty($studentArray)){
+                                                    $col = array_column($studentArray, 'studentGrade');
+                                                    array_multisort($col, SORT_DESC, $studentArray);
+                                            ?>
+                                        <!-- table strip dark -->
+                                        <div class="table-responsive">
+                                            <table class="table table-striped mb-0" id="myTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>NAME</th>
+                                                        <th>AVERAGE</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                        for($i = 0; $i < count($studentArray); $i++){
+                                                    ?>
+                                                    <tr>
+                                                        <td class="text-bold-500"><?php echo $studentArray[$i]['studentName']; ?></td>
+                                                        <td class="text-bold-500"><?php echo $studentArray[$i]['studentGrade']; ?></td>
+                                                    </tr>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <?php
-                                            //GET Subject ID using GET METHOD
-                                            $subjectID = $_GET['subject_id'];
-                                            //FETCH tbl_grade
-                                            $sql = $conn->prepare("SELECT CAST(AVG(grade) AS DECIMAL (10,2)), tbl_student.id,
-                                            tbl_student.stud_name, tbl_grade.id FROM tbl_grade
-                                            LEFT JOIN tbl_subject ON
-                                            tbl_subject.id=tbl_grade.grade_subject_id
-                                            LEFT JOIN tbl_student ON
-                                            tbl_student.id=tbl_grade.grade_stud_id
-                                            WHERE tbl_subject.subject_id = $subjectID ORDER BY AVG(grade) DESC");
-                                            $sql->execute();
-                                            //Initialize Rank Number
-                                            $rankCounter = 0;
-                                            while($fetch = $sql->fetch()){
-                                                $rankCounter++;
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $rankCounter;?></td>
-                                                <td><?php echo $fetch['stud_name']?></td>
-                                                <td><?php echo $fetch['CAST(AVG(grade) AS DECIMAL (10,2))']?></td>
-                                            </tr>
-                                        <?php
-                                            };
-                                        ?>
-                                    </tbody>
-                                </table>
+                                                }
+                                                else{
+                                                    echo '<img src="../../images/card-img.jpg">';
+                                                }
+
+                                            ?>
                             </div>
                         </div>
 

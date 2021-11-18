@@ -66,7 +66,6 @@
                                 <table class="table table-striped mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Rank</th>
                                             <th>Student Name</th>
                                             <th>Grade</th>
                                         </tr>
@@ -84,13 +83,9 @@
                                             tbl_student.id=tbl_grade.grade_stud_id
                                             WHERE `grade_subject_id` = $subjectID ORDER BY grade DESC");
                                             $sql->execute();
-                                            //Initialize Rank Number
-                                            $rankCounter = 0;
                                             while($fetch = $sql->fetch()){
-                                                $rankCounter++;
                                         ?>
                                             <tr>
-                                                <td><?php echo $rankCounter;?></td>
                                                 <td><?php echo $fetch['stud_name']?></td>
                                                 <td><?php echo $fetch['grade']?></td>
                                             </tr>

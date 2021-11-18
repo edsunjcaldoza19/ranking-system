@@ -37,8 +37,19 @@
                         <div class="row">
                              <!-- populate table with db data -->
                              <?php
-                                /** Fetch Staff ID */
+                                /** Fetch Sy and Staff ID */
+                                $schoolYearID = $_GET['sy_id'];
                                 $adviserSession = $_SESSION['staff_id'];
+
+                                /** Check if Class Exists */
+                                $query = "SELECT * FROM tbl_class
+                                WHERE class_sy = $schoolYearID
+                                AND class_adviser = '$staffID'";
+                                $result=$conn->query($query);
+                                $count = $result->rowCount();
+
+                                if($count != 0){
+
                                 require 'be/database/db_pdo.php';
                                 $sqlClass = $conn->prepare("SELECT *, tbl_class.id FROM tbl_class
                                 LEFT JOIN tbl_section ON
@@ -47,7 +58,8 @@
                                 tbl_grade_level.id=tbl_section.s_grade_level
                                 LEFT JOIN tbl_account_staff ON
                                 tbl_account_staff.id=tbl_class.class_adviser
-                                WHERE tbl_class.class_adviser = $adviserSession");
+                                WHERE class_sy = $schoolYearID
+                                AND tbl_class.class_adviser = $adviserSession");
                                 $sqlClass->execute();
                                 while($fetchClass = $sqlClass->fetch()){
                             ?>
@@ -78,6 +90,10 @@
                             </div>
                             <?php
                                 }
+                            }
+                            else{
+                                echo '<img src="../../images/card-img.jpg">';
+                            }
                             ?>
 
                         </div>

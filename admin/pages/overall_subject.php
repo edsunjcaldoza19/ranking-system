@@ -39,6 +39,12 @@
                              <?php
                                 /** Fetch School Year */
                                 $schoolYearID = $_GET['sy_id'];
+                                /** Check if Class Exists */
+                                $query = "SELECT * FROM tbl_class WHERE class_sy = $schoolYearID";
+                                $result=$conn->query($query);
+                                $count = $result->rowCount();
+
+                                if($count != 0){
 
                                 require 'be/database/db_pdo.php';
                                 $sqlClass = $conn->prepare("SELECT *, tbl_class.id FROM tbl_class
@@ -78,6 +84,10 @@
                             </div>
                             <?php
                                 }
+                            }
+                            else{
+                                echo '<img src="../../images/card-img.jpg">';
+                            }
                             ?>
 
                         </div>

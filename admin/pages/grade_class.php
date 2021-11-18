@@ -40,6 +40,14 @@
                              /** Fetch School Year ID and Quarter ID */
                              $getSchoolYear = $_GET['sy_id'];
                              $getQuarter = $_GET['quarter_id'];
+                             /** Check if Class Exists */
+                             $query = "SELECT * FROM tbl_class
+                             WHERE class_sy = $getSchoolYear";
+                             $result=$conn->query($query);
+                             $count = $result->rowCount();
+
+                             if($count != 0){
+
                                 require 'be/database/db_pdo.php';
                                 $sqlClass = $conn->prepare("SELECT *, tbl_class.id FROM tbl_class
                                 LEFT JOIN tbl_section ON
@@ -79,6 +87,10 @@
                             </div>
                             <?php
                                 }
+                            }
+                            else{
+                                echo '<img src="../../images/card-img.jpg">';
+                            }
                             ?>
 
                         </div>
