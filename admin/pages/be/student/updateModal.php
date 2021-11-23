@@ -27,8 +27,20 @@
                         <div class="form-group">
                             <label>Gender</label>
                             <select class="form-select" name="studSex">
-                                <option name="studSex" value="Male">Male</option>
-                                <option name="studSex" value="Female">Female</option>
+                                <option name="studSex" value="Male"
+                                <?php
+                                    if($fetch['stud_sex'] == 'Male'){
+                                        echo 'selected';
+                                    }
+                                ?>>
+                                Male</option>
+                                <option name="studSex" value="Female"
+                                <?php
+                                    if($fetch['stud_sex'] == 'Female'){
+                                        echo 'selected';
+                                    }
+                                ?>>
+                                Female</option>
                             </select>
                         </div>
                         <div class="form-group">

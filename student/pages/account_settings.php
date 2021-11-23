@@ -72,15 +72,17 @@
                                                 height ratio.
                                         </div>
                                         </div>
+                                        <div class="row">
                                         <div class="form-group">
                                              <!-- Load IMAGE filename -->
                                              <input type="hidden" name="oldImage" value="<?php echo $fetchStudent['stud_img']; ?>">
                                                     <?php
                                                         $image = (!empty($fetchStudent['stud_img'])) ? '../../images/student/'.$fetchStudent['stud_img'] : '../../images/student/default.png';
                                                     ?>
-                                            <div class="col-md-12 text-center">
+                                            <div class="col-sm-12 text-center row">
                                                 <img src="<?php echo $image; ?>" id="preview"  width="350px" height="350px" style="border: 2px solid; border-radius: 100%;"/>
                                             </div>
+                                        </div>
                                         </div>
                                         </div>
                                     </div>
@@ -115,8 +117,20 @@
                                                         <div class="form-group">
                                                             <label>Gender</label>
                                                             <select class="form-select" name="sex">
-                                                                <option name="sex" value="Male">Male</option>
-                                                                <option name="sex" value="Female">Female</option>
+                                                                <option name="sex" value="Male"
+                                                                <?php
+                                                                    if($fetchStudent['stud_sex'] == 'Male'){
+                                                                        echo 'selected';
+                                                                    }
+                                                                ?>
+                                                                >Male</option>
+                                                                <option name="sex" value="Female"
+                                                                <?php
+                                                                    if($fetchStudent['stud_sex'] == 'Female'){
+                                                                        echo 'selected';
+                                                                    }
+                                                                ?>
+                                                                >Female</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-12">

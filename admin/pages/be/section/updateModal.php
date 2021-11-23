@@ -6,7 +6,7 @@
             <div class="modal-content">
             <form action="be/section/update.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-header bg-primary">
-                        <h5 class="modal-title white" id="myModalLabel110">Update School Year
+                        <h5 class="modal-title white" id="myModalLabel110">Update Section
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">
@@ -28,7 +28,13 @@
                                 $sqlGradeLevel->execute();
                                 while($fetchGradeLevel = $sqlGradeLevel->fetch()){
                             ?>
-                                <option name="sectionGradeLevel" value="<?php echo $fetchGradeLevel['id'] ?>"><?php echo $fetchGradeLevel['gl_grade_level'] ?></option>
+                                <option name="sectionGradeLevel"
+                                    <?php
+                                        if($fetch['gl_grade_level'] == $fetchGradeLevel['gl_grade_level']){
+                                            echo 'selected';
+                                        }
+                                    ?>
+                                ><?php echo $fetchGradeLevel['gl_grade_level'] ?></option>
                             <?php
                                 }
                             ?>

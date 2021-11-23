@@ -25,10 +25,12 @@
 
                 <li class="sidebar-title">Subject Teacher</li>
 
-                <li class="sidebar-item has-sub <?= ($activePage == 'class_quarter' || $activePage == 'class_subject') ? 'active': ''; ?>">
+                <li class="sidebar-item has-sub <?= ($activePage == 'class_quarter'
+                || $activePage == 'class_subject'
+                || $activePage == 'class_grade') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
-                        <span>Browse Classes</span>
+                        <span>Main Subjects</span>
                     </a>
                     <ul class="submenu ">
                     <li>
@@ -50,13 +52,41 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item has-sub <?= ($activePage == 'class_branch_quarter'
+                || $activePage == 'class_branch_subject'
+                || $activePage == 'class_branch_grade') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-person-check-fill"></i>
+                        <span>Branch Subjects</span>
+                    </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`
+                            WHERE `sy_status` = 'Active'");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'class_branch_quarter' || $activePage == 'class_subject') ? 'active': ''; ?> ">
+                            <a href="class_branch_quarter.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </li>
+
                 <li class="sidebar-title">Advisory Class</li>
 
                 <li class="sidebar-item has-sub <?= (
                     $activePage == 'grade' ||
                     $activePage == 'grade_class' ||
                     $activePage == 'grade_student' ||
-                    $activePage == 'grade_subject') ? 'active': ''; ?>">
+                    $activePage == 'grade_subject' ||
+                    $activePage == 'grade_student_branch') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
                         <span>Student Grade</span>

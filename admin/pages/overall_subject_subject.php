@@ -40,7 +40,7 @@
                     <section class="section">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Subject List</h3>
+                                <h3>Subject List (Main Subjects)</h3>
                             </div>
                             <div class="card-body">
                             <?php
@@ -101,7 +101,91 @@
                             <?php
                                 }
                                 else{
-                                    echo '<img src="../../images/card-img.jpg">';
+                                    ?>
+                                    <div class="row">
+                                    <?php
+                                    echo '<h2 class="text-center">No Record Found</h2>';
+                                    echo '<img src="../../images/empty.png">';
+                                    ?>
+                                    </div>
+                                    <?php
+                                }
+                            ?>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Subject List (Main Subjects)</h3>
+                            </div>
+                            <div class="card-body">
+                            <?php
+                                $getSchoolYear = $_GET['sy_id'];
+                                $getClassID = $_GET['class_id'];
+                                require 'be/database/db_pdo.php';
+                                $sql = $conn->prepare("SELECT *,tbl_subject_branch.id FROM tbl_subject_branch
+                                LEFT JOIN tbl_subject_branch_details ON
+                                tbl_subject_branch_details.id = tbl_subject_branch.sbranch_subject_id
+                                LEFT JOIN tbl_class ON
+                                tbl_class.id=tbl_subject_branch.sbranch_class_id
+                                LEFT JOIN tbl_section ON
+                                tbl_section.id=tbl_class.class_section
+                                LEFT JOIN tbl_grade_level ON
+                                tbl_grade_level.id=tbl_section.s_grade_level
+                                WHERE `class_sy` = $getSchoolYear
+                                AND `sbranch_class_id` = $getClassID");
+                                $sql->execute();
+                                    while($fetch = $sql->fetch()){
+                                    $subjectDetails[] = $fetch['sbranch_subject_id'];
+                                    $uniqueSubject = array_unique($subjectDetails);
+                                };
+
+                                if(!empty($subjectDetails)){
+                            ?>
+                                <table class="table" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject Name</th>
+                                            <th style="width: 20%;">Select</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Populate table with db data -->
+
+                                            <?php
+
+                                            for($i = 0; $i < count($uniqueSubject); $i++){
+                                                $index = $uniqueSubject[$i];
+                                                $sql = $conn->prepare("SELECT * FROM tbl_subject_branch_details
+                                                WHERE `id` = $index");
+                                                $sql->execute();
+                                                while($fetch = $sql->fetch()){
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $fetch['sbranch_name']; ?></td>
+                                                <td>
+                                                    <a href="overall_subject_student.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
+                                                    class="btn btn-primary btn rounded-pill mt-2">Select</a>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                                }
+                                            }
+                                                ?>
+                                            <?php
+                                            ?>
+                                    </tbody>
+                                </table>
+                            <?php
+                                }
+                                else{
+                                    ?>
+                                    <div class="row">
+                                    <?php
+                                    echo '<h2 class="text-center">No Record Found</h2>';
+                                    echo '<img src="../../images/empty.png">';
+                                    ?>
+                                    </div>
+                                    <?php
                                 }
                             ?>
                             </div>

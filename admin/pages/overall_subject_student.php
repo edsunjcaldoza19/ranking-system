@@ -111,7 +111,14 @@
                                         <?php
                                                 }
                                                 else{
-                                                    echo '<img src="../../images/card-img.jpg">';
+                                                    ?>
+                                                    <div class="row">
+                                                    <?php
+                                                    echo '<h2 class="text-center">No Record Found</h2>';
+                                                    echo '<img src="../../images/empty.png">';
+                                                    ?>
+                                                    </div>
+                                                    <?php
                                                 }
 
                                             ?>

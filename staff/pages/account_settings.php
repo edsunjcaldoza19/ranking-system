@@ -56,6 +56,10 @@
                                                     <label>Password</label>
                                                     <input type="password" value="<?php echo $fetch['staff_password']; ?>" class="form-control" name="staffPassword" placeholder="Enter Password" required>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label>Confirm Password</label>
+                                                    <input type="password" value="<?php echo $fetch['staff_password']; ?>" class="form-control" name="staffConfirmPassword" placeholder="Enter Password" required>
+                                                </div>
                                             <h4 class="card-title">Profile Picture</h4>
                                             <div class="form-group">
                                                 <label>

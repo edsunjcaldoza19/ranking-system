@@ -60,7 +60,7 @@
 
 					<div class="text-center p-t-90">
 						<a class="txt1" href="#">
-							Forgot Password?
+							Ranking System
 						</a>
 					</div>
 				</form>

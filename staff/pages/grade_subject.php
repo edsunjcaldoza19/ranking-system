@@ -92,6 +92,67 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- Subject Branches Start -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Subject List</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table" id="table2">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject Name</th>
+                                            <th style="width: 20%;">Select</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Populate table with db data -->
+                                        <?php
+                                            $getSchoolYear = $_GET['sy_id'];
+                                            $getQuarterID = $_GET['quarter_id'];
+                                            $getClassID = $_GET['class_id'];
+                                            require 'be/database/db_pdo.php';
+                                            $sql = $conn->prepare("SELECT *, tbl_subject_branch.id FROM tbl_subject_branch
+                                            LEFT JOIN tbl_quarter ON
+                                            tbl_quarter.id=tbl_subject_branch.sbranch_quarter_id
+
+                                            LEFT JOIN tbl_subject_branch_details ON
+                                            tbl_subject_branch_details.id=tbl_subject_branch.sbranch_subject_id
+                                            LEFT JOIN tbl_subject_details ON
+                                            tbl_subject_details.id=tbl_subject_branch_details.sbranch_main_subject_id
+
+                                            LEFT JOIN tbl_class ON
+                                            tbl_class.id=tbl_subject_branch.sbranch_class_id
+                                            LEFT JOIN tbl_section ON
+                                            tbl_section.id=tbl_class.class_section
+                                            LEFT JOIN tbl_grade_level ON
+                                            tbl_grade_level.id=tbl_section.s_grade_level
+
+                                            WHERE `sbranch_quarter_id` = $getQuarterID
+                                            AND `class_sy` = $getSchoolYear
+                                            AND `sbranch_class_id` = $getClassID");
+                                            $sql->execute();
+                                            while($fetch = $sql->fetch()){
+                                        ?>
+                                            <tr>
+                                                <td><?php
+                                                echo $fetch['subject_name'];
+                                                echo " - ";
+                                                echo $fetch['sbranch_name'];
+                                                ?></td>
+                                                <td>
+                                                    <a href="grade_student_branch.php?sy_id=<?php echo $_GET['sy_id'];?>&&quarter_id=<?php echo $_GET['quarter_id']; ?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
+                                                    class="btn btn-primary btn rounded-pill mt-2">Select</a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                            };
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- Subject Branch End -->
 
                     </section>
                     <!-- Basic Tables end -->
@@ -111,7 +172,8 @@
     <script src="../../assets/vendors/fontawesome/all.min.js"></script>
     <script>
         // Jquery Datatable
-        let jquery_datatable = $("#table1").DataTable()
+        let jquery_datatable1 = $("#table1").DataTable()
+        let jquery_datatable2 = $("#table2").DataTable()
     </script>
     <script src="../../js/mazer.js"></script>
 </body>

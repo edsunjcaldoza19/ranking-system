@@ -12,12 +12,33 @@
 
             $username = $_POST['username'];
             $password = $_POST['password'];
+			$cPassword = $_POST['cPassword'];
 
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			if($password == $cPassword){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE `tbl_student` SET `stud_name`='$name',`stud_sex`='$sex',
             `stud_date_birth`='$date_birth',`stud_address`='$address',`stud_username`='$username',
             `stud_password`='$password' WHERE `id` = $id";
 			$conn->exec($sql);
+			echo '
+				<script>
+
+					$(document).ready(function(){
+
+						Swal.fire({
+							icon: "success",
+							title: "Student Account Successfully Updated",
+							timer: 3000
+						}).then(function(){
+
+							window.location.replace("../../account_settings.php");
+
+						});
+
+					});
+
+				</script>
+			';
 
 			 //Path Info for Profile Picture
 			 $image=$_FILES['studImage']['name'];
@@ -52,28 +73,32 @@
 			 else{
 				 $msg="No Changes";
 			 }
+			}
+			else{
+				echo '
+				<script>
+
+					$(document).ready(function(){
+
+						Swal.fire({
+							icon: "error",
+							title: "Password Mismatch",
+							timer: 3000
+						}).then(function(){
+
+							window.location.replace("../../account_settings.php");
+
+						});
+
+					});
+
+				</script>
+			';
+			}
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
 		$conn = null;
-		echo '
-		<script>
 
-			$(document).ready(function(){
-
-				Swal.fire({
-					icon: "success",
-					title: "Student Account Successfully Updated",
-					timer: 3000
-				}).then(function(){
-
-					window.location.replace("../../account_settings.php");
-
-				});
-
-			});
-
-		</script>
-	';
 	}
 ?>

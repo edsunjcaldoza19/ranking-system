@@ -95,6 +95,64 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Class List</h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table" id="table1">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject Name</th>
+                                            <th>Grade</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Populate table with db data -->
+                                        <?php
+                                            //Fetch Staff ID using Session
+                                            $getStudentID = $_SESSION['student_id'];
+                                            $getClassID = $_GET['class_id'];
+                                            $getQuarterID = $_GET['quarter_id'];
+                                            require 'be/database/db_pdo.php';
+                                            $sql = $conn->prepare("SELECT *, tbl_grade_branch.id FROM tbl_grade_branch
+                                            LEFT JOIN tbl_subject_branch ON
+                                            tbl_subject_branch.id=tbl_grade_branch.gbranch_subject_id
+                                            LEFT JOIN tbl_subject_branch_details ON
+                                            tbl_subject_branch_details.id=tbl_subject_branch.sbranch_subject_id
+
+                                            LEFT JOIN tbl_student ON
+                                            tbl_student.id=tbl_grade_branch.gbranch_stud_id
+
+                                            WHERE `sbranch_quarter_id` = $getQuarterID
+                                            AND `sbranch_class_id` = $getClassID
+                                            AND `gbranch_stud_id` = $getStudentID");
+                                            $sql->execute();
+                                            while($fetch = $sql->fetch()){
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $fetch['sbranch_name']?></td>
+                                                <td><?php echo $fetch['gbranch_grade']?></td>
+                                                <td>
+                                                    <?php
+                                                    if($fetch['gbranch_grade'] >= '75'){
+                                                        echo('<span class="badge bg-success">Passed</span>');
+                                                    }
+                                                    else{
+                                                        echo('<span class="badge bg-danger">Failed</span>');
+                                                    }
+                                                    ?>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                            };
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
 
                     </section>
                     <!-- Basic Tables end -->

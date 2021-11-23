@@ -7,6 +7,7 @@
 			$id = $_POST['staffID'];
 			$staffUsername = $_POST['staffUsername'];
             $staffPassword = $_POST['staffPassword'];
+			$staffConfirmPassword = $_POST['staffConfirmPassword'];
             $staffName = $_POST['staffName'];
             $staffSex = $_POST['staffSex'];
             $staffAddress = $_POST['staffAddress'];
@@ -14,13 +15,34 @@
             $staffEmail = $_POST['staffEmail'];
             $staffContact = $_POST['staffContact'];
 
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			if($staffPassword == $staffConfirmPassword){
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE `tbl_account_staff` SET `staff_username`='$staffUsername',
             `staff_password`='$staffPassword',
             `staff_name`='$staffName',`staff_sex`='$staffSex',
             `staff_address`='$staffAddress',`staff_date_birth`='$staffDateBirth',
             `staff_email`='$staffEmail',`staff_contact`='$staffContact' WHERE `id` = '$id'";
 			$conn->exec($sql);
+
+			echo '
+				<script>
+
+					$(document).ready(function(){
+
+						Swal.fire({
+							icon: "success",
+							title: "Account Successfully Updated",
+							timer: 3000
+						}).then(function(){
+
+							window.location.replace("../../account_settings.php");
+
+						});
+
+					});
+
+				</script>
+			';
 
             //pathinfo
 			$image=$_FILES['staffImage']['name'];
@@ -50,28 +72,32 @@
 			else{
 				$msg="No Changes";
 			}
+			}
+			else{
+				echo '
+				<script>
+
+					$(document).ready(function(){
+
+						Swal.fire({
+							icon: "error",
+							title: "Password Mismatch",
+							timer: 3000
+						}).then(function(){
+
+							window.location.replace("../../account_settings.php");
+
+						});
+
+					});
+
+				</script>
+			';
+			}
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}
 		$conn = null;
-		echo '
-		<script>
 
-			$(document).ready(function(){
-
-				Swal.fire({
-					icon: "success",
-					title: "Account Successfully Updated",
-					timer: 3000
-				}).then(function(){
-
-					window.location.replace("../../account_settings.php");
-
-				});
-
-			});
-
-		</script>
-	';
 	}
 ?>

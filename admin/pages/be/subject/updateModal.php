@@ -6,7 +6,7 @@
             <div class="modal-content">
             <form action="be/subject/update.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&quarter_id=<?php echo $_GET['quarter_id'];?>" method="POST" enctype="multipart/form-data">
                 <div class="modal-header bg-primary">
-                        <h5 class="modal-title white" id="myModalLabel110">Update School Year
+                        <h5 class="modal-title white" id="myModalLabel110">Update Subject
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">
@@ -24,7 +24,13 @@
                                 $sqlSubject->execute();
                                 while($fetchSubject = $sqlSubject->fetch()){
                             ?>
-                                <option value="<?php echo $fetchSubject['id'] ?>"><?php echo $fetchSubject['subject_name'] ?></option>
+                                <option value="<?php echo $fetchSubject['id'] ?>"
+                                <?php
+                                if($fetchSubject['id'] == $fetch['subject_id']){
+                                    echo 'selected';
+                                }
+                                ?>
+                                ><?php echo $fetchSubject['subject_name'] ?></option>
                             <?php
                                 }
                             ?>
@@ -39,7 +45,13 @@
                                 $sqlTeacher->execute();
                                 while($fetchTeacher = $sqlTeacher->fetch()){
                             ?>
-                                <option value="<?php echo $fetchTeacher['id'] ?>"><?php echo $fetchTeacher['staff_name'] ?></option>
+                                <option value="<?php echo $fetchTeacher['id'] ?>"
+                                <?php
+                                if($fetchTeacher['id'] == $fetch['subject_teacher']){
+                                    echo 'selected';
+                                }
+                                ?>
+                                ><?php echo $fetchTeacher['staff_name'] ?></option>
                             <?php
                                 }
                             ?>

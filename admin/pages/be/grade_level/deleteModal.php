@@ -6,7 +6,7 @@
             <div class="modal-content">
             <form action="be/grade_level/delete.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-header bg-danger">
-                        <h5 class="modal-title white" id="myModalLabel110">Delete School Year
+                        <h5 class="modal-title white" id="myModalLabel110">Delete Grade Level
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">

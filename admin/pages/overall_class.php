@@ -60,7 +60,7 @@
                             ?>
 
                             <div class="col-xl-4 col-md-6 col-sm-12">
-                                <div class="card">
+                                <div class="card animate__animated animate__fadeInUp">
                                     <div class="card-content">
                                         <div class="card-body">
                                             <h4><?php
@@ -86,7 +86,14 @@
                                 }
                             }
                             else{
-                                echo '<img src="../../images/card-img.jpg">';
+                                ?>
+                                <div class="row">
+                                <?php
+                                echo '<h2 class="text-center">No Record Found</h2>';
+                                echo '<img src="../../images/empty.png">';
+                                ?>
+                                </div>
+                                <?php
                             }
                             ?>
 

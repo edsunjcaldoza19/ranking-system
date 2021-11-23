@@ -6,7 +6,7 @@
         role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                        <h5 class="modal-title white" id="myModalLabel110">Add School Year
+                        <h5 class="modal-title white" id="myModalLabel110">Add Announcement
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">

@@ -104,15 +104,37 @@
                                                                 <tr>
                                                                     <th>NAME</th>
                                                                     <th>AVERAGE</th>
+                                                                    <th>HONORS</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <?php
                                                                     for($i = 0; $i < count($studentArray); $i++){
+                                                                        //Honors Received
+                                                                    $checkGrade = $studentArray[$i]['studentGrade'];
+                                                                    if($checkGrade >= 98.00 && $checkGrade <= 100.00){
+                                                                        $studenthonors = "With Highest Honors";
+                                                                    }
+                                                                    else if($checkGrade >= 95.00 && $checkGrade <= 97.00){
+                                                                        $studenthonors = "With High Honors";
+                                                                    }
+                                                                    else if($checkGrade >= 90.00 && $checkGrade <= 94.00){
+                                                                        $studenthonors = "With Honors";
+                                                                    }
+                                                                    else if($checkGrade >= 75.00 && $checkGrade <= 89.00){
+                                                                        $studenthonors = "Promoted";
+                                                                    }
+                                                                    else if($checkGrade >= 0.00 && $checkGrade <= 74.00){
+                                                                        $studenthonors = "Failed";
+                                                                    }
+                                                                    else{
+                                                                        $studenthonors = "Not Yet Graded";
+                                                                    }
                                                                 ?>
                                                                 <tr>
                                                                     <td class="text-bold-500"><?php echo $studentArray[$i]['studentName']; ?></td>
                                                                     <td class="text-bold-500"><?php echo $studentArray[$i]['studentGrade']; ?></td>
+                                                                    <td class="text-bold-500"><?php echo $studenthonors; ?></td>
                                                                 </tr>
                                                                 <?php
                                                                     }
@@ -123,7 +145,14 @@
                                                     <?php
                                                 }
                                                 else{
-                                                    echo '<img src="../../images/card-img.jpg">';
+                                                    ?>
+                                                    <div class="row">
+                                                    <?php
+                                                    echo '<h2 class="text-center">No Record Found</h2>';
+                                                    echo '<img src="../../images/empty.png">';
+                                                    ?>
+                                                    </div>
+                                                    <?php
                                                 }
 
                                             ?>

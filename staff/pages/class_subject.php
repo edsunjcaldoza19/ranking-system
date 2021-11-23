@@ -40,7 +40,7 @@
                     <section class="section">
                         <div class="card">
                             <div class="card-header">
-                                <h3>Class List</h3>
+                                <h3>Class List (Main Subjects)</h3>
                             </div>
                             <div class="card-body">
                                 <table class="table" id="table1">
@@ -117,7 +117,9 @@
     <script src="../../assets/vendors/fontawesome/all.min.js"></script>
     <script>
         // Jquery Datatable
-        let jquery_datatable = $("#table1").DataTable()
+        let jquery_datatable = $("#table1").DataTable();
+        let jquery_datatable = $("#table2").DataTable();
+
     </script>
     <script src="../../js/mazer.js"></script>
 </body>

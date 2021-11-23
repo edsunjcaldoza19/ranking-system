@@ -6,7 +6,7 @@
             <div class="modal-content">
             <form action="be/class/update.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-header bg-primary">
-                        <h5 class="modal-title white" id="myModalLabel110">Update School Year
+                        <h5 class="modal-title white" id="myModalLabel110">Update Class
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">

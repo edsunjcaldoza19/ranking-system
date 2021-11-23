@@ -70,7 +70,8 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item <?= ($activePage == 'account_staff') ? 'active': ''; ?>">
+                <li class="sidebar-item <?= ($activePage == 'account_staff' ||
+                $activePage == 'account_staff_update') ? 'active': ''; ?>">
                     <a href="account_staff.php" class='sidebar-link'>
                         <i class="bi bi-person-fill"></i>
                         <span>Staff Accounts</span>
@@ -116,6 +117,8 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-title">Subject</li>
+
                 <li class="sidebar-item <?= ($activePage == 'subject_details') ? 'active': ''; ?>">
                     <a href="subject_details.php" class='sidebar-link'>
                         <i class="bi bi-bookmark-fill"></i>
@@ -123,7 +126,7 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item has-sub <?= ($activePage == 'subject') ? 'active': ''; ?>">
+                <li class="sidebar-item has-sub <?= ($activePage == 'subject' || $activePage == 'subject_add') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-book-fill"></i>
                         <span>Assign Subjects</span>
@@ -147,12 +150,44 @@
                     </ul>
                 </li>
 
+                <li class="sidebar-item <?= ($activePage == 'sbranch_details') ? 'active': ''; ?>">
+                    <a href="sbranch_details.php" class='sidebar-link'>
+                        <i class="bi bi-bookmark-fill"></i>
+                        <span>Subject Branch Details</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item has-sub <?= ($activePage == 'sbranch' || $activePage == 'sbranch_add') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-book-fill"></i>
+                        <span>Assign Branches</span>
+                    </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'sbranch') ? 'active': ''; ?> ">
+                            <a href="sbranch.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </li>
+
                 <li class="sidebar-title">Statistics</li>
 
                 <li class="sidebar-item has-sub <?= (
                     $activePage == 'grade' ||
                     $activePage == 'grade_class' ||
                     $activePage == 'grade_student' ||
+                    $activePage == 'grade_student_branch' ||
                     $activePage == 'grade_subject') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-person-check-fill"></i>
@@ -208,7 +243,8 @@
                     $activePage == 'ranking_subject' ||
                     $activePage == 'ranking_subject_class' ||
                     $activePage == 'ranking_subject_subject' ||
-                    $activePage == 'ranking_subject_student') ? 'active': ''; ?>">
+                    $activePage == 'ranking_subject_student' ||
+                    $activePage == 'ranking_subject_student_branch') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-graph-up"></i>
                         <span>Ranking by Subject</span>
@@ -262,7 +298,8 @@
                 <li class="sidebar-item has-sub <?= (
                     $activePage == 'overall_subject' ||
                     $activePage == 'overall_subject_subject' ||
-                    $activePage == 'overall_subject_student') ? 'active': ''; ?>">
+                    $activePage == 'overall_subject_student' ||
+                    $activePage == 'overall_subject_student_branch') ? 'active': ''; ?>">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                         <span>Overall Rank Subject</span>

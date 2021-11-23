@@ -37,14 +37,14 @@
                     <section class="section">
                         <div class="row">
                             <div class="col-12 col-md-6 col-sm-12">
-                                <div class="alert alert-primary">
+                                <div class="alert alert-primary animate__animated animate__fadeInUp">
                                     <h4 class="alert-heading">Welcome Back, <?php echo $fetchAdmin['admin_username']; ?></h4>
                                     <hr>
                                     <p>Hello :) This is an overview of some data from the ranking system.</p>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6 col-sm-12">
-                                <div class="alert alert-warning">
+                                <div class="alert alert-warning animate__animated animate__fadeInUp">
                                     <h4 class="alert-heading" id="time">Hello :)</h4>
                                     <hr>
                                     <p id="date">Sunday, February 5, 2021</p>
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6 animate__animated animate__fadeInUp">
                             <div class="card bg bg-primary">
                                 <div class="card-body px-3 py-4-5">
                                     <div class="row">
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6 animate__animated animate__fadeInUp">
                             <div class="card bg bg-success">
                                 <div class="card-body px-3 py-4-5">
                                     <div class="row">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6 animate__animated animate__fadeInUp">
                             <div class="card bg bg-danger">
                                 <div class="card-body px-3 py-4-5">
                                     <div class="row">
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-3 col-md-6">
+                        <div class="col-6 col-lg-3 col-md-6 animate__animated animate__fadeInUp">
                             <div class="card bg bg-primary">
                                 <div class="card-body px-3 py-4-5">
                                     <div class="row">
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="basic-table">
+                    <div class="row animate__animated animate__fadeInUp" id="basic-table">
                         <div class="col-12 col-md-6">
                             <div class="card">
                                 <div class="card-header">
