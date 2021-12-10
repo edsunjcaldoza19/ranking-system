@@ -28,7 +28,7 @@
                                 $sqlGradeLevel->execute();
                                 while($fetchGradeLevel = $sqlGradeLevel->fetch()){
                             ?>
-                                <option name="sectionGradeLevel"
+                                <option name="sectionGradeLevel" value="<?php echo $fetchGradeLevel['id']; ?>"
                                     <?php
                                         if($fetch['gl_grade_level'] == $fetchGradeLevel['gl_grade_level']){
                                             echo 'selected';

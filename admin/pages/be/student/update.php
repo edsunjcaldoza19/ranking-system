@@ -11,7 +11,7 @@
 			$studDateBirth = $_POST['studDateBirth'];
 			$studAddress = $_POST['studAddress'];
 
-			$studPassword = $_POST['studIDNum'];
+			$studPassword = password_hash($_POST['studIDNum'], PASSWORD_BCRYPT);
 			$studUsername = $_POST['studIDNum'];
 
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

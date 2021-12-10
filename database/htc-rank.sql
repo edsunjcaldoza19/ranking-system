@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2021 at 04:47 PM
+-- Generation Time: Dec 09, 2021 at 03:38 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -64,6 +64,13 @@ CREATE TABLE `tbl_account_staff` (
   `staff_contact` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_account_staff`
+--
+
+INSERT INTO `tbl_account_staff` (`id`, `staff_image`, `staff_username`, `staff_password`, `staff_name`, `staff_sex`, `staff_address`, `staff_date_birth`, `staff_email`, `staff_contact`) VALUES
+(21, 'IMG_STAFF2021120710386.png', 'user1', '$2y$10$VcFOIvnAnZ30JR9CENwsB.Caq6H302C2nSffKJ1vWKT06Aej/yVyK', 'Caldoza, Edsun J.', 'Male', 'Jaro, Leyte', '2001-02-19', 'user1@gmail.com', '09393963696');
+
 -- --------------------------------------------------------
 
 --
@@ -84,7 +91,8 @@ CREATE TABLE `tbl_announcement` (
 INSERT INTO `tbl_announcement` (`id`, `announce_title`, `announce_details`, `announce_created_at`) VALUES
 (4, 'Submission of Grades', 'Submission of grades for the teachers', 'November 14, 2021, 5:55:07 PM'),
 (5, 'Cards Day', 'Please visit our school to view the cards of your student enrolled in our institution', 'November 15, 2021, 7:32:31 AM'),
-(7, 'Birthday ni Yanyan', 'Attend Kamo...', 'November 19, 2021, 2:40:42 PM');
+(7, 'Birthday ni Yanyan', 'Attend Kamo...', 'November 19, 2021, 2:40:42 PM'),
+(8, 'LOL', 'LOL', 'December 9, 2021, 10:19:42 PM');
 
 -- --------------------------------------------------------
 
@@ -99,6 +107,15 @@ CREATE TABLE `tbl_class` (
   `class_adviser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_class`
+--
+
+INSERT INTO `tbl_class` (`id`, `class_sy`, `class_section`, `class_adviser`) VALUES
+(25, 15, 18, 21),
+(26, 15, 18, 21),
+(27, 15, 18, 21);
+
 -- --------------------------------------------------------
 
 --
@@ -111,6 +128,13 @@ CREATE TABLE `tbl_grade` (
   `grade_stud_id` int(11) NOT NULL,
   `grade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_grade`
+--
+
+INSERT INTO `tbl_grade` (`id`, `grade_subject_id`, `grade_stud_id`, `grade`) VALUES
+(77, 55, 37, 90);
 
 -- --------------------------------------------------------
 
@@ -125,6 +149,15 @@ CREATE TABLE `tbl_grade_branch` (
   `gbranch_grade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_grade_branch`
+--
+
+INSERT INTO `tbl_grade_branch` (`id`, `gbranch_subject_id`, `gbranch_stud_id`, `gbranch_grade`) VALUES
+(17, 31, 37, 97),
+(18, 32, 37, 89),
+(19, 36, 37, 100);
+
 -- --------------------------------------------------------
 
 --
@@ -135,6 +168,35 @@ CREATE TABLE `tbl_grade_level` (
   `id` int(11) NOT NULL,
   `gl_grade_level` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_grade_level`
+--
+
+INSERT INTO `tbl_grade_level` (`id`, `gl_grade_level`) VALUES
+(16, 'Grade 1'),
+(17, 'Grade 2'),
+(18, 'Grade 3'),
+(19, 'Grade 4');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_logs`
+--
+
+CREATE TABLE `tbl_logs` (
+  `id` int(11) NOT NULL,
+  `log_desc` varchar(500) NOT NULL,
+  `log_ts` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_logs`
+--
+
+INSERT INTO `tbl_logs` (`id`, `log_desc`, `log_ts`) VALUES
+(11, 'Deleted Subject Branch', 'December 9, 2021, 10:31:59 PM');
 
 -- --------------------------------------------------------
 
@@ -148,6 +210,13 @@ CREATE TABLE `tbl_populate_class` (
   `pop_stud_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_populate_class`
+--
+
+INSERT INTO `tbl_populate_class` (`id`, `pop_class_id`, `pop_stud_id`) VALUES
+(30, 25, 37);
+
 -- --------------------------------------------------------
 
 --
@@ -158,6 +227,15 @@ CREATE TABLE `tbl_quarter` (
   `id` int(11) NOT NULL,
   `q_quarter` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_quarter`
+--
+
+INSERT INTO `tbl_quarter` (`id`, `q_quarter`) VALUES
+(21, '1st Quarter'),
+(22, '2nd Quarter'),
+(23, '3rd Quarter');
 
 -- --------------------------------------------------------
 
@@ -194,6 +272,13 @@ CREATE TABLE `tbl_school_year` (
   `sy_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_school_year`
+--
+
+INSERT INTO `tbl_school_year` (`id`, `sy_school_year`, `sy_status`) VALUES
+(15, '2020-2021', 'Active');
+
 -- --------------------------------------------------------
 
 --
@@ -205,6 +290,13 @@ CREATE TABLE `tbl_section` (
   `s_name` varchar(100) NOT NULL,
   `s_grade_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_section`
+--
+
+INSERT INTO `tbl_section` (`id`, `s_name`, `s_grade_level`) VALUES
+(18, 'Justice', 16);
 
 -- --------------------------------------------------------
 
@@ -224,6 +316,15 @@ CREATE TABLE `tbl_student` (
   `stud_password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_student`
+--
+
+INSERT INTO `tbl_student` (`id`, `stud_id_num`, `stud_img`, `stud_name`, `stud_sex`, `stud_date_birth`, `stud_address`, `stud_username`, `stud_password`) VALUES
+(37, 1800635, '', 'Caldoza, Edsun J', 'Male', '2001-02-19', 'Jaro, Leyte', '1800635', '$2y$10$aMU9tbxocV/cUfZQ2RPfh.zgiadLl05yLxjEJ18dzDDBxLn9aIWLy'),
+(38, 1800633, '', 'Caldoza, Edsun J', 'Male', '2001-02-19', 'Jaro, Leyte', '1800633', '$2y$10$WmqDmwl0TkBjd2fzK9ESbuSSvrr20C2Q7oeSlbwHH/mSLHp5KLo2.'),
+(39, 123, '', 'Caldoza,', 'Male', '2001-02-19', 'Jaro, Leyte', '123', '$2y$10$z9FkYKzdA5wdiDBUWMoa6.uEmTyavtslvk4coFwHesTdHI3YoH6kO');
+
 -- --------------------------------------------------------
 
 --
@@ -237,6 +338,13 @@ CREATE TABLE `tbl_subject` (
   `subject_id` int(11) NOT NULL,
   `subject_teacher` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_subject`
+--
+
+INSERT INTO `tbl_subject` (`id`, `subject_class_id`, `subject_quarter_id`, `subject_id`, `subject_teacher`) VALUES
+(55, 25, 21, 12, 21);
 
 -- --------------------------------------------------------
 
@@ -252,6 +360,15 @@ CREATE TABLE `tbl_subject_branch` (
   `sbranch_teacher` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_subject_branch`
+--
+
+INSERT INTO `tbl_subject_branch` (`id`, `sbranch_class_id`, `sbranch_quarter_id`, `sbranch_subject_id`, `sbranch_teacher`) VALUES
+(40, 25, 21, 17, 21),
+(41, 25, 22, 16, 21),
+(43, 25, 22, 18, 21);
+
 -- --------------------------------------------------------
 
 --
@@ -264,6 +381,16 @@ CREATE TABLE `tbl_subject_branch_details` (
   `sbranch_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_subject_branch_details`
+--
+
+INSERT INTO `tbl_subject_branch_details` (`id`, `sbranch_main_subject_id`, `sbranch_name`) VALUES
+(16, 12, 'Music'),
+(17, 12, 'Arts'),
+(18, 12, 'PE'),
+(19, 12, 'Health');
+
 -- --------------------------------------------------------
 
 --
@@ -274,6 +401,14 @@ CREATE TABLE `tbl_subject_details` (
   `id` int(11) NOT NULL,
   `subject_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_subject_details`
+--
+
+INSERT INTO `tbl_subject_details` (`id`, `subject_name`) VALUES
+(12, 'MAPEH'),
+(13, 'Science');
 
 --
 -- Indexes for dumped tables
@@ -319,6 +454,12 @@ ALTER TABLE `tbl_grade_branch`
 -- Indexes for table `tbl_grade_level`
 --
 ALTER TABLE `tbl_grade_level`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -395,49 +536,55 @@ ALTER TABLE `tbl_account_admin`
 -- AUTO_INCREMENT for table `tbl_account_staff`
 --
 ALTER TABLE `tbl_account_staff`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_announcement`
 --
 ALTER TABLE `tbl_announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_class`
 --
 ALTER TABLE `tbl_class`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tbl_grade`
 --
 ALTER TABLE `tbl_grade`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `tbl_grade_branch`
 --
 ALTER TABLE `tbl_grade_branch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_grade_level`
 --
 ALTER TABLE `tbl_grade_level`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `tbl_logs`
+--
+ALTER TABLE `tbl_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_populate_class`
 --
 ALTER TABLE `tbl_populate_class`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_quarter`
 --
 ALTER TABLE `tbl_quarter`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_school_details`
@@ -449,43 +596,43 @@ ALTER TABLE `tbl_school_details`
 -- AUTO_INCREMENT for table `tbl_school_year`
 --
 ALTER TABLE `tbl_school_year`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tbl_section`
 --
 ALTER TABLE `tbl_section`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_student`
 --
 ALTER TABLE `tbl_student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject`
 --
 ALTER TABLE `tbl_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject_branch`
 --
 ALTER TABLE `tbl_subject_branch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject_branch_details`
 --
 ALTER TABLE `tbl_subject_branch_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject_details`
 --
 ALTER TABLE `tbl_subject_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

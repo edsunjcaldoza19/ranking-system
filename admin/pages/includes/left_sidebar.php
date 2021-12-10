@@ -324,6 +324,12 @@
                 </li>
 
                 <li class="sidebar-title">Settings</li>
+                <li class="sidebar-item <?= ($activePage == 'logs') ? 'active': ''; ?>">
+                    <a href="logs.php" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Logs</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item <?= ($activePage == 'settings_account') ? 'active': ''; ?>">
                     <a href="settings_account.php" class='sidebar-link'>

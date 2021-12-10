@@ -14,6 +14,7 @@
 			(`subject_class_id`, `subject_quarter_id`, `subject_id`, `subject_teacher`)
 			VALUES ('$subjectClass','$subjectQuarter','$subjectName','$subjectTeacher')";
 			$conn->exec($sql);
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

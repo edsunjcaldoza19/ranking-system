@@ -115,14 +115,14 @@
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                <h3>Subject List (Main Subjects)</h3>
+                                <h3>Subject List (Branch Subjects)</h3>
                             </div>
                             <div class="card-body">
                             <?php
                                 $getSchoolYear = $_GET['sy_id'];
                                 $getClassID = $_GET['class_id'];
                                 require 'be/database/db_pdo.php';
-                                $sql = $conn->prepare("SELECT *,tbl_subject_branch.id FROM tbl_subject_branch
+                                $sql = $conn->prepare("SELECT DISTINCT tbl_subject_branch.sbranch_subject_id FROM tbl_subject_branch
                                 LEFT JOIN tbl_subject_branch_details ON
                                 tbl_subject_branch_details.id = tbl_subject_branch.sbranch_subject_id
                                 LEFT JOIN tbl_class ON
@@ -135,10 +135,9 @@
                                 AND `sbranch_class_id` = $getClassID");
                                 $sql->execute();
                                     while($fetch = $sql->fetch()){
-                                    $subjectDetails[] = $fetch['sbranch_subject_id'];
-                                    $uniqueSubject = array_unique($subjectDetails);
+                                        $subjectDetails[] = $fetch['sbranch_subject_id'];
+                                        $uniqueSubject = array_unique($subjectDetails);
                                 };
-
                                 if(!empty($subjectDetails)){
                             ?>
                                 <table class="table" id="table1">
@@ -163,7 +162,7 @@
                                             <tr>
                                                 <td><?php echo $fetch['sbranch_name']; ?></td>
                                                 <td>
-                                                    <a href="overall_subject_student.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
+                                                    <a href="overall_subject_student_branch.php?sy_id=<?php echo $_GET['sy_id'];?>&&class_id=<?php echo $_GET['class_id'];?>&&subject_id=<?php echo $fetch['id'];?>"
                                                     class="btn btn-primary btn rounded-pill mt-2">Select</a>
                                                 </td>
                                             </tr>

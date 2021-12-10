@@ -12,6 +12,14 @@
 			$sql = "UPDATE `tbl_subject_branch_details`
             SET `sbranch_main_subject_id` = '$subjectMainID', `sbranch_name` = '$subjectName' WHERE `id` = '$id'";
 			$conn->exec($sql);
+
+			date_default_timezone_set('Asia/Taipei');
+			$logDesc = "Updated Subject Branch - $subjectName";
+			$timestamp = date('F j, Y, g:i:s A');
+
+			$sqlLog = "INSERT INTO tbl_logs(`log_desc`, `log_ts`)
+            VALUES('$logDesc', '$timestamp')";
+			$conn->exec($sqlLog);
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

@@ -10,6 +10,13 @@
 			$sql = "INSERT INTO tbl_section(`s_name`, `s_grade_level`)
             VALUES('$sectionName', '$sectionGradeLevel')";
 			$conn->exec($sql);
+			date_default_timezone_set('Asia/Taipei');
+			$logDesc = "Added new Section - $sectionName";
+			$timestamp = date('F j, Y, g:i:s A');
+
+			$sqlLog = "INSERT INTO tbl_logs(`log_desc`, `log_ts`)
+            VALUES('$logDesc', '$timestamp')";
+			$conn->exec($sqlLog);
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

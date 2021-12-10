@@ -22,6 +22,7 @@
                             <div class="col-12 col-md-6 order-md-1 order-last">
                                 <h3>Student Grade</h3>
                                 <p class="text-subtitle text-muted">Displays Student Record</p>
+                                <button type="button" class="btn btn-primary" name="printOrder" onclick="window.print();">Print</button>
                             </div>
                             <div class="col-12 col-md-6 order-md-2 order-first">
                                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -35,8 +36,26 @@
                     </div>
                     <!-- End Page Header + Title -->
 
+                    <!-- Print Document for Ranking -->
+                <style>
+                  @media print {
+                    body * {
+                      visibility: hidden;
+                    }
+                    .print-container * {
+                      visibility: visible;
+                    }
+                    .print-container {
+                      position: absolute;
+                      left: 0px;
+                      top: 0px;
+
+                    }
+                  }
+                </style>
                     <!-- Striped rows with inverse dark table start -->
-                    <section class="section">
+                   <div class="print-container">
+                   <section class="section">
                         <div class="row" id="table-striped-dark">
                             <div class="col-12">
                                 <div class="card">
@@ -161,6 +180,7 @@
                             </div>
                         </div>
                     </section>
+                   </div>
                     <!-- Striped rows with inverse dark table end -->
                 </div>
                 <?php

@@ -12,6 +12,7 @@
 			$sql = "UPDATE `tbl_subject`
 			SET `subject_id`='$subjectName',`subject_teacher`='$subjectTeacher' WHERE `id` = '$id'";
 			$conn->exec($sql);
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

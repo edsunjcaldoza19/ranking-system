@@ -10,6 +10,13 @@
 			$sql = "INSERT INTO tbl_school_year(`sy_school_year`, `sy_status`)
             VALUES('$schoolYear', '$syStatus')";
 			$conn->exec($sql);
+			date_default_timezone_set('Asia/Taipei');
+			$logDesc = "Added School Year - $schoolYear";
+			$timestamp = date('F j, Y, g:i:s A');
+
+			$sqlLog = "INSERT INTO tbl_logs(`log_desc`, `log_ts`)
+            VALUES('$logDesc', '$timestamp')";
+			$conn->exec($sqlLog);
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

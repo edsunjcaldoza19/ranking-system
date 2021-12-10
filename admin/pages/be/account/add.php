@@ -24,7 +24,7 @@
 
 			//Get Input Values
 			$staffUsername = $_POST['staffUsername'];
-            $staffPassword = $_POST['staffPassword'];
+            $staffPassword = password_hash($_POST['staffPassword'], PASSWORD_BCRYPT);
             $staffName = $_POST['staffName'];
             $staffSex = $_POST['staffSex'];
             $staffAddress = $_POST['staffAddress'];
@@ -40,6 +40,13 @@
             '$staffSex','$staffAddress','$staffDateBirth',
             '$staffEmail','$staffContact')";
 			$conn->exec($sql);
+			date_default_timezone_set('Asia/Taipei');
+			$logDesc = "Added Staff Account - $staffName";
+			$timestamp = date('F j, Y, g:i:s A');
+
+			$sqlLog = "INSERT INTO tbl_logs(`log_desc`, `log_ts`)
+            VALUES('$logDesc', '$timestamp')";
+			$conn->exec($sqlLog);
 
 		}catch(PDOException $e){
 			echo $e->getMessage();

@@ -6,7 +6,7 @@
 		try{
 			$id = $_POST['staffID'];
 			$staffUsername = $_POST['staffUsername'];
-            $staffPassword = $_POST['staffPassword'];
+            $staffPassword = password_hash($_POST['staffPassword'], PASSWORD_BCRYPT);
             $staffName = $_POST['staffName'];
             $staffSex = $_POST['staffSex'];
             $staffAddress = $_POST['staffAddress'];
@@ -21,6 +21,13 @@
             `staff_address`='$staffAddress',`staff_date_birth`='$staffDateBirth',
             `staff_email`='$staffEmail',`staff_contact`='$staffContact' WHERE `id` = '$id'";
 			$conn->exec($sql);
+			date_default_timezone_set('Asia/Taipei');
+			$logDesc = "Updated Staff Account - $staffName";
+			$timestamp = date('F j, Y, g:i:s A');
+
+			$sqlLog = "INSERT INTO tbl_logs(`log_desc`, `log_ts`)
+            VALUES('$logDesc', '$timestamp')";
+			$conn->exec($sqlLog);
 
             //pathinfo
 			$image=$_FILES['staffImage']['name'];
@@ -36,6 +43,7 @@
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$sql = "UPDATE `tbl_account_staff` SET `staff_image`='$newname' WHERE `id` = '$id'";
 				$conn->exec($sql);
+
 				if (unlink("../../../../images/staff/".$oldImage)) {
 					$msg= "Deleted";
 				}

@@ -8,6 +8,7 @@
 			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "DELETE FROM `tbl_subject` WHERE `id` = '$id'";
 			$conn->exec($sql);
+
 		}catch(PDOException $e){
 			echo $e->getMessage();
 		}

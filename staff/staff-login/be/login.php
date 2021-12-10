@@ -14,18 +14,15 @@
 		die("Fatal Error: Connection Failed!");
 	}
 
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+
 	if(ISSET($_POST['login'])){
-		if($_POST['username'] != "" || $_POST['password'] != ""){
-			$username = $_POST['username'];
-			// md5 encrypted
-			// $password = md5($_POST['password']);
-			$password = $_POST['password'];
-			$sql = "SELECT * FROM `tbl_account_staff` WHERE `staff_username`=? AND `staff_password`=? ";
-			$query = $conn->prepare($sql);
-			$query->execute(array($username,$password));
-			$row = $query->rowCount();
-			$fetch = $query->fetch();
-			if($row > 0) {
+		$sql = $conn->prepare("SELECT * from `tbl_account_staff` where `staff_username` = '$username'");
+		$sql->execute();
+
+		if($fetch = $sql->fetch()){
+			if(password_verify($password, $fetch['staff_password'])){
 				$_SESSION['staff_id'] = $fetch['id'];
                 $_SESSION['staff_username'] = $fetch['staff_username'];
                 $_SESSION['staff_password'] = $fetch['staff_password'];
@@ -47,7 +44,8 @@
 						});
 					</script>
 				';
-			} else{
+			}
+			else{
 				echo '
 					<script>
 						$(document).ready(function(){
@@ -65,23 +63,25 @@
 					</script>
 				';
 			}
-		}else{
+
+		}
+		else{
 			echo '
-					<script>
-						$(document).ready(function(){
-							Swal.fire({
-								icon: "error",
-								title: "Please input username and Password First",
-								timer: 2000
-							}).then(function(){
+				<script>
+					$(document).ready(function(){
+						Swal.fire({
+							icon: "error",
+							title: "Invalid User Credentials Please Login Again",
+							timer: 2000
+						}).then(function(){
 
-								window.location.replace("../index.php");
-
-							});
+							window.location.replace("../index.php");
 
 						});
-					</script>
-				';
+
+					});
+				</script>
+			';
 		}
 	}
 ?>

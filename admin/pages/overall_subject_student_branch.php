@@ -39,19 +39,21 @@
                     <!-- Basic Tables start -->
                     <section class="section">
                         <div class="card">
-                            <div class="card-header">
+                        <div class="card-header">
                                 <?php
                                     //GET Subject ID using GET METHOD
                                     $subjectID = $_GET['subject_id'];
                                     //FETCH tbl_grade
-                                    $sql = $conn->prepare("SELECT *, tbl_subject.id FROM tbl_subject
+                                    $sql = $conn->prepare("SELECT *, tbl_subject_branch.id FROM tbl_subject_branch
+                                    LEFT JOIN tbl_subject_branch_details ON
+                                    tbl_subject_branch_details.id = tbl_subject_branch.sbranch_subject_id
                                     LEFT JOIN tbl_subject_details ON
-                                    tbl_subject_details.id = tbl_subject.subject_id
-                                    WHERE tbl_subject_details.id = $subjectID");
+                                    tbl_subject_details.id=tbl_subject_branch_details.sbranch_main_subject_id
+                                    WHERE tbl_subject_branch.sbranch_subject_id = $subjectID");
                                     $sql->execute();
                                     $fetch = $sql->fetch();
                                 ?>
-                                <h3><?php echo $fetch['subject_name']; ?> - Student Overall Ranking</h3>
+                                <h3><?php echo $fetch['sbranch_name']; ?> - Student Ranking</h3>
                             </div>
                             <div class="card-body">
                             <?php
