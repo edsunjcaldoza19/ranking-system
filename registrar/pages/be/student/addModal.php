@@ -16,7 +16,7 @@
                 <div class="modal-body">
                         <div class="form-group">
                             <label>Student ID Number LRN</label>
-                            <input type="number" class="form-control" name="studIDNum" placeholder="Enter Student Number" max="12">
+                            <input type="number" class="form-control" name="studIDNum" placeholder="Enter Student Number">
                         </div>
                         <div class="form-group">
                             <label>Student Name</label>

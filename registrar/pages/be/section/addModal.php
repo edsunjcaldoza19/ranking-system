@@ -1,12 +1,12 @@
     <!-- Add Modal -->
-    <form action="be/student/add.php" method="POST" enctype="multipart/form-data">
+    <form action="be/section/add.php" method="POST" enctype="multipart/form-data">
     <div class="modal fade text-left" id="addModal" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel110" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
         role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                        <h5 class="modal-title white" id="myModalLabel110">Add Student Information
+                        <h5 class="modal-title white" id="myModalLabel110">Add Section
                         </h5>
                         <button type="button" class="close" data-bs-dismiss="modal"
                             aria-label="Close">
@@ -15,28 +15,23 @@
                 </div>
                 <div class="modal-body">
                         <div class="form-group">
-                            <label>Student ID Number LRN</label>
-                            <input type="number" class="form-control" name="studIDNum" placeholder="Enter Student Number" max="12">
+                            <label>Section Name</label>
+                            <input type="text" class="form-control" name="sectionName" placeholder="Enter Section Name">
                         </div>
                         <div class="form-group">
-                            <label>Student Name</label>
-                            <input type="text" class="form-control" name="studName" placeholder="Enter Student Name">
-                            <small>Last Name, First Name, Middle Initial</small>
-                        </div>
-                        <div class="form-group">
-                            <label>Gender</label>
-                            <select class="form-select" name="studSex">
-                                <option name="studSex" value="Male">Male</option>
-                                <option name="studSex" value="Female">Female</option>
+                            <label>Grade Level</label>
+                            <select class="form-select" name="sectionGradeLevel">
+                            <?php
+                                require 'be/database/db_pdo.php';
+                                $sql = $conn->prepare("SELECT * FROM `tbl_grade_level` ORDER BY `gl_grade_level` ASC");
+                                $sql->execute();
+                                while($fetch = $sql->fetch()){
+                            ?>
+                                <option name="sectionGradeLevel" value="<?php echo $fetch['id'] ?>"><?php echo $fetch['gl_grade_level'] ?></option>
+                            <?php
+                                }
+                            ?>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Date of Birth</label>
-                            <input type="date" class="form-control" name="studDateBirth" placeholder="Date of Birth">
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input type="text" class="form-control" name="studAddress" placeholder="Enter Address">
                         </div>
                 </div>
                 <div class="modal-footer">

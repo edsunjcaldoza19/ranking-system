@@ -4,7 +4,7 @@
         <div class="sidebar-header">
             <div class="d-flex justify-content-between">
                 <div class="logo">
-                    <a href="index.html">Admin</a>
+                    <a href="index.html">Registrar</a>
                 </div>
                 <div class="toggler">
                     <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -18,19 +18,6 @@
                     <a href="home.php" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item <?= ($activePage == 'school_year') ? 'active': ''; ?>">
-                    <a href="school_year.php" class='sidebar-link'>
-                        <i class="bi bi-calendar-date-fill"></i>
-                        <span>School Year</span>
-                    </a>
-                </li>
-                <li class="sidebar-item <?= ($activePage == 'quarter') ? 'active': ''; ?>">
-                    <a href="quarter.php" class='sidebar-link'>
-                        <i class="bi bi-calendar-event-fill"></i>
-                        <span>Quarters</span>
                     </a>
                 </li>
 
@@ -53,154 +40,6 @@
                         <i class="bi bi-person-plus-fill"></i>
                         <span>Students</span>
                     </a>
-                </li>
-
-                <li class="sidebar-item <?= ($activePage == 'announcement') ? 'active': ''; ?>">
-                    <a href="announcement.php" class='sidebar-link'>
-                        <i class="bi bi-archive"></i>
-                        <span>Announcements</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-title">Accounts</li>
-                <li class="sidebar-item <?= ($activePage == 'account_staff_add') ? 'active': ''; ?>">
-                    <a href="account_staff_add.php" class='sidebar-link'>
-                        <i class="bi bi-person-plus-fill"></i>
-                        <span>Add Staff Account</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item <?= ($activePage == 'account_staff' ||
-                $activePage == 'account_staff_update') ? 'active': ''; ?>">
-                    <a href="account_staff.php" class='sidebar-link'>
-                        <i class="bi bi-person-fill"></i>
-                        <span>Staff Accounts</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item <?= ($activePage == 'account_browse') ? 'active': ''; ?>">
-                    <a href="account_browse.php" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
-                        <span>Browse Accounts</span>
-                    </a>
-                </li>
-                <li class="sidebar-title">Registrar Accounts</li>
-                <li class="sidebar-item <?= ($activePage == 'account_registrar_add') ? 'active': ''; ?>">
-                    <a href="account_registrar_add.php" class='sidebar-link'>
-                        <i class="bi bi-person-plus-fill"></i>
-                        <span>Add Registrar Account</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item <?= ($activePage == 'account_registrar' ||
-                $activePage == 'account_registrar_update') ? 'active': ''; ?>">
-                    <a href="account_registrar.php" class='sidebar-link'>
-                        <i class="bi bi-person-fill"></i>
-                        <span>Registrar Accounts</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item <?= ($activePage == 'account_registrar_browse') ? 'active': ''; ?>">
-                    <a href="account_registrar_browse.php" class='sidebar-link'>
-                        <i class="bi bi-people-fill"></i>
-                        <span>Browse Accounts</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-title">Classes</li>
-                <li class="sidebar-item <?= ($activePage == 'class') ? 'active': ''; ?>">
-                    <a href="class.php" class='sidebar-link'>
-                        <i class="bi bi-bookmark-fill"></i>
-                        <span>Create Class</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item has-sub <?= ($activePage == 'populate_class' || $activePage == 'populate_class_student') ? 'active': ''; ?>">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-person-check-fill"></i>
-                        <span>Populate Class</span>
-                    </a>
-                    <ul class="submenu ">
-                    <li>
-                        <?php
-                            require 'be/database/db_pdo.php';
-                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
-                            $sql->execute();
-                            while($fetch = $sql->fetch()){
-                        ?>
-                        <li class="submenu-item <?= ($activePage == 'populate_class' || $activePage == 'populate_class_student') ? 'active': ''; ?> ">
-                            <a href="populate_class.php?sy_id=<?php echo $fetch['id']; ?>">
-                                <?php echo $fetch['sy_school_year']; ?>
-                            </a>
-                        </li>
-                        <?php
-                            }
-                        ?>
-                    </ul>
-                </li>
-
-                <li class="sidebar-title">Subject</li>
-
-                <li class="sidebar-item <?= ($activePage == 'subject_details') ? 'active': ''; ?>">
-                    <a href="subject_details.php" class='sidebar-link'>
-                        <i class="bi bi-bookmark-fill"></i>
-                        <span>Subject Details</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item has-sub <?= ($activePage == 'subject' || $activePage == 'subject_add') ? 'active': ''; ?>">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-book-fill"></i>
-                        <span>Assign Subjects</span>
-                    </a>
-                    <ul class="submenu ">
-                    <li>
-                        <?php
-                            require 'be/database/db_pdo.php';
-                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
-                            $sql->execute();
-                            while($fetch = $sql->fetch()){
-                        ?>
-                        <li class="submenu-item <?= ($activePage == 'subject') ? 'active': ''; ?> ">
-                            <a href="subject.php?sy_id=<?php echo $fetch['id']; ?>">
-                                <?php echo $fetch['sy_school_year']; ?>
-                            </a>
-                        </li>
-                        <?php
-                            }
-                        ?>
-                    </ul>
-                </li>
-
-                <li class="sidebar-item <?= ($activePage == 'sbranch_details') ? 'active': ''; ?>">
-                    <a href="sbranch_details.php" class='sidebar-link'>
-                        <i class="bi bi-bookmark-fill"></i>
-                        <span>Subject Branch Details</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item has-sub <?= ($activePage == 'sbranch' || $activePage == 'sbranch_add') ? 'active': ''; ?>">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-book-fill"></i>
-                        <span>Assign Branches</span>
-                    </a>
-                    <ul class="submenu ">
-                    <li>
-                        <?php
-                            require 'be/database/db_pdo.php';
-                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
-                            $sql->execute();
-                            while($fetch = $sql->fetch()){
-                        ?>
-                        <li class="submenu-item <?= ($activePage == 'sbranch') ? 'active': ''; ?> ">
-                            <a href="sbranch.php?sy_id=<?php echo $fetch['id']; ?>">
-                                <?php echo $fetch['sy_school_year']; ?>
-                            </a>
-                        </li>
-                        <?php
-                            }
-                        ?>
-                    </ul>
                 </li>
 
                 <li class="sidebar-title">Statistics</li>
@@ -344,14 +183,35 @@
                         ?>
                     </ul>
                 </li>
+                <li class="sidebar-title">Student Grade</li>
+                <li class="sidebar-item has-sub <?= (
+                    $activePage == 'student_grade_selClass' ||
+                    $activePage == 'student_grade_selStudent' ||
+                    $activePage == 'student_grade') ? 'active': ''; ?>">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Student Grades</span>
+                    </a>
+                    <ul class="submenu ">
+                    <li>
+                        <?php
+                            require 'be/database/db_pdo.php';
+                            $sql = $conn->prepare("SELECT * FROM `tbl_school_year`");
+                            $sql->execute();
+                            while($fetch = $sql->fetch()){
+                        ?>
+                        <li class="submenu-item <?= ($activePage == 'student_grade_selClass') ? 'active': ''; ?> ">
+                            <a href="student_grade_selClass.php?sy_id=<?php echo $fetch['id']; ?>">
+                                <?php echo $fetch['sy_school_year']; ?>
+                            </a>
+                        </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                </li>
 
                 <li class="sidebar-title">Settings</li>
-                <li class="sidebar-item <?= ($activePage == 'logs') ? 'active': ''; ?>">
-                    <a href="logs.php" class='sidebar-link'>
-                    <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                        <span>Logs</span>
-                    </a>
-                </li>
 
                 <li class="sidebar-item <?= ($activePage == 'settings_account') ? 'active': ''; ?>">
                     <a href="settings_account.php" class='sidebar-link'>
@@ -359,13 +219,6 @@
                         <span>Account Settings</span>
                     </a>
                 </li>
-                <li class="sidebar-item <?= ($activePage == 'settings_details') ? 'active': ''; ?>">
-                    <a href="settings_details.php" class='sidebar-link'>
-                    <i class="bi bi-pen-fill"></i>
-                        <span>School Details</span>
-                    </a>
-                </li>
-
             </ul>
         </div>
         <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
