@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2021 at 03:38 PM
+-- Generation Time: Dec 22, 2021 at 03:35 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -44,6 +44,32 @@ CREATE TABLE `tbl_account_admin` (
 
 INSERT INTO `tbl_account_admin` (`id`, `admin_image`, `admin_username`, `admin_password`, `admin_name`, `admin_email`, `admin_contact`, `admin_address`) VALUES
 (2, 'IMG_ADMIN20211118275.jpg', 'admin', 'admin', 'Caldoza, Edsun J.', 'edsunjcaldoza@gmail.com', '09393963696', 'Jaro, Leyte');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_account_registrar`
+--
+
+CREATE TABLE `tbl_account_registrar` (
+  `id` int(11) NOT NULL,
+  `reg_image` varchar(500) NOT NULL,
+  `reg_username` varchar(100) NOT NULL,
+  `reg_password` varchar(100) NOT NULL,
+  `reg_name` varchar(100) NOT NULL,
+  `reg_sex` varchar(50) NOT NULL,
+  `reg_address` varchar(100) NOT NULL,
+  `reg_birth_date` varchar(100) NOT NULL,
+  `reg_email` varchar(100) NOT NULL,
+  `reg_contact` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_account_registrar`
+--
+
+INSERT INTO `tbl_account_registrar` (`id`, `reg_image`, `reg_username`, `reg_password`, `reg_name`, `reg_sex`, `reg_address`, `reg_birth_date`, `reg_email`, `reg_contact`) VALUES
+(3, 'IMG_REG202112154644.png', 'edsun', '$2y$10$heXmuVQMHK9Kk.d7g673Y.0Ff/pN3BXnR5mM1tcSZHmhDHizQkt1G', 'Edsun', 'Male', 'Jaro', '2001-02-19', 'edsunjcaldoza@gmail.com', '09393963696');
 
 -- --------------------------------------------------------
 
@@ -196,7 +222,17 @@ CREATE TABLE `tbl_logs` (
 --
 
 INSERT INTO `tbl_logs` (`id`, `log_desc`, `log_ts`) VALUES
-(11, 'Deleted Subject Branch', 'December 9, 2021, 10:31:59 PM');
+(11, 'Deleted Subject Branch', 'December 9, 2021, 10:31:59 PM'),
+(12, 'Added Registrar Account - Edsun Registrar', 'December 15, 2021, 8:48:06 PM'),
+(13, 'Updated Registrar Account - Edsun Registrar', 'December 15, 2021, 8:54:58 PM'),
+(14, 'Updated Registrar Account - Edsun Registrar', 'December 15, 2021, 8:55:10 PM'),
+(15, 'Deleted A Registrar Account', 'December 15, 2021, 8:56:15 PM'),
+(16, 'Added Registrar Account - Registrar', 'December 15, 2021, 8:57:27 PM'),
+(17, 'Deleted A Registrar Account', 'December 15, 2021, 8:57:33 PM'),
+(18, 'Added Registrar Account - Edsun', 'December 15, 2021, 9:00:36 PM'),
+(19, 'Updated Registrar Account - Edsun', 'December 15, 2021, 9:12:03 PM'),
+(20, 'Updated Registrar Account - Edsun', 'December 15, 2021, 9:12:17 PM'),
+(21, 'Updated Registrar Account - Edsun', 'December 15, 2021, 9:31:57 PM');
 
 -- --------------------------------------------------------
 
@@ -321,9 +357,9 @@ CREATE TABLE `tbl_student` (
 --
 
 INSERT INTO `tbl_student` (`id`, `stud_id_num`, `stud_img`, `stud_name`, `stud_sex`, `stud_date_birth`, `stud_address`, `stud_username`, `stud_password`) VALUES
-(37, 1800635, '', 'Caldoza, Edsun J', 'Male', '2001-02-19', 'Jaro, Leyte', '1800635', '$2y$10$aMU9tbxocV/cUfZQ2RPfh.zgiadLl05yLxjEJ18dzDDBxLn9aIWLy'),
+(37, 1800635, '', 'Caldoza, Edsun J', 'Male', '2001-02-19', 'Jaro, Leyte', '1800635', '$2y$10$JNj78t4QPkB0sUltFIn1vOf7GmgakwQkZ7cIQ4SsjtVWqfFCWzUf6'),
 (38, 1800633, '', 'Caldoza, Edsun J', 'Male', '2001-02-19', 'Jaro, Leyte', '1800633', '$2y$10$WmqDmwl0TkBjd2fzK9ESbuSSvrr20C2Q7oeSlbwHH/mSLHp5KLo2.'),
-(39, 123, '', 'Caldoza,', 'Male', '2001-02-19', 'Jaro, Leyte', '123', '$2y$10$z9FkYKzdA5wdiDBUWMoa6.uEmTyavtslvk4coFwHesTdHI3YoH6kO');
+(39, 123, '', 'Caldoza,', 'Male', '2001-02-19', 'Jaro, Leyte', '123', '$2y$10$As/qSk53XsODE/zrGINSrOvCtIXfFFL36YBHmTROdklJK4WZJ40AS');
 
 -- --------------------------------------------------------
 
@@ -367,7 +403,9 @@ CREATE TABLE `tbl_subject_branch` (
 INSERT INTO `tbl_subject_branch` (`id`, `sbranch_class_id`, `sbranch_quarter_id`, `sbranch_subject_id`, `sbranch_teacher`) VALUES
 (40, 25, 21, 17, 21),
 (41, 25, 22, 16, 21),
-(43, 25, 22, 18, 21);
+(43, 25, 22, 18, 21),
+(48, 25, 23, 19, 21),
+(49, 25, 21, 16, 21);
 
 -- --------------------------------------------------------
 
@@ -418,6 +456,12 @@ INSERT INTO `tbl_subject_details` (`id`, `subject_name`) VALUES
 -- Indexes for table `tbl_account_admin`
 --
 ALTER TABLE `tbl_account_admin`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_account_registrar`
+--
+ALTER TABLE `tbl_account_registrar`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -533,6 +577,12 @@ ALTER TABLE `tbl_account_admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tbl_account_registrar`
+--
+ALTER TABLE `tbl_account_registrar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `tbl_account_staff`
 --
 ALTER TABLE `tbl_account_staff`
@@ -572,7 +622,7 @@ ALTER TABLE `tbl_grade_level`
 -- AUTO_INCREMENT for table `tbl_logs`
 --
 ALTER TABLE `tbl_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_populate_class`
@@ -620,7 +670,7 @@ ALTER TABLE `tbl_subject`
 -- AUTO_INCREMENT for table `tbl_subject_branch`
 --
 ALTER TABLE `tbl_subject_branch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `tbl_subject_branch_details`
